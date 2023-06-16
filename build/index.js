@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Classes_1 = require("./models/Classes");
+const App_1 = require("./services/App");
+App_1.app.post("/signup", Classes_1.userController.signup);
+App_1.app.post("/login", Classes_1.userController.login);
+App_1.app.get("/profile", Classes_1.userController.getProfile);
+App_1.app.put("/profile/edit", Classes_1.userController.editProfileName);
+App_1.app.delete("/user/profile", Classes_1.userController.deleteUser);
+App_1.app.post("/user/registerCard", Classes_1.cardController.createCard);
+App_1.app.get("/user/cards", Classes_1.cardController.getAllCards);
+App_1.app.delete("/user/card/:cardId", Classes_1.cardController.deleteCard);
+App_1.app.post("/insertProduct", Classes_1.productController.insertProduct);
+App_1.app.get("/products", Classes_1.productController.getProducts);
+App_1.app.put("/product/:productId/edit", Classes_1.productController.editPrice);
+App_1.app.delete("/product/:productId", Classes_1.productController.deleteProduct);
+App_1.app.post("/products/:productId/creditCard", Classes_1.paymentController.creditPayment);
+App_1.app.post("/products/:productId/boleto", Classes_1.paymentController.boletoPayment);
+App_1.app.get("/profile/purchases/credit_card", Classes_1.paymentController.getCardPayment);
+App_1.app.get("/profile/purchases/boleto", Classes_1.paymentController.getBoletoPayment);
+//# sourceMappingURL=index.js.map
