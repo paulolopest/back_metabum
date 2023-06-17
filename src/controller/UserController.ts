@@ -14,7 +14,7 @@ export class UserController {
 				password
 			);
 
-			res.status(201).send({ message: response });
+			res.status(201).send({ token: response });
 		} catch (error: any) {
 			res.status(500).send(error.message || error.sqlMessage);
 		}
@@ -25,7 +25,7 @@ export class UserController {
 			const { email, password } = req.body;
 			const response = await this.userBussines.login(email, password);
 
-			res.status(200).send({ message: response });
+			res.status(200).send({ token: response });
 		} catch (error: any) {
 			res.status(500).send(error.message || error.sqlMessage);
 		}
