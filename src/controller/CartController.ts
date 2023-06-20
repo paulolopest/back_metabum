@@ -17,4 +17,34 @@ export class CartController {
 			res.status(500).send(error.message || error.sqlMessage);
 		}
 	};
+
+	getUserCart = async (req: Request, res: Response) => {
+		try {
+			const token = req.headers.authorization as string;
+
+			const result = await this.cartBusiness.getUserCart(token);
+
+			res.status(200).send(result);
+		} catch (error: any) {
+			res.status(500).send(error.message || error.sqlMessage);
+		}
+	};
+
+	editProductQuantity = async (req: Request, res: Response) => {
+		try {
+			const token = req.headers.authorization as string;
+			const { productId } = req.params;
+			const { quantity } = req.body;
+
+			await this.cartBusiness.editProductQuantity(
+				token,
+				productId,
+				quantity
+			);
+
+			res.status(200).send('Quantity successfully updated');
+		} catch (error: any) {
+			res.status(500).send(error.message || error.sqlMessage);
+		}
+	};
 }

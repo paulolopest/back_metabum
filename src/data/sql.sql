@@ -89,4 +89,6 @@ CREATE TABLE
         quantity INT NOT NULL
     );
 
+SELECT * FROM metabum_cart;
+
 DROP TABLE metabum_cart;

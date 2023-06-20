@@ -29,3 +29,5 @@ app.get('/profile/purchases/credit_card', paymentController.getCardPayment);
 app.get('/profile/purchases/boleto', paymentController.getBoletoPayment);
 
 app.post('/cart/add/:productId', cartController.addProduct);
+app.get('/cart/user', cartController.getUserCart);
+app.put('/cart/edit-quantity/:productId', cartController.editProductQuantity);

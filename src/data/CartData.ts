@@ -10,4 +10,47 @@ export class CartData extends BaseDatabase {
 			quantity: cart.getQuantity(),
 		});
 	};
+
+	getUserCart = async (id: string) => {
+		try {
+			const result = await this.connection('metabum_cart').where({
+				user_id: id,
+			});
+
+			return result;
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	getProductInCart = async (userId: string, productId: string) => {
+		try {
+			const result = await this.connection('metabum_cart')
+				.where({
+					user_id: userId,
+				})
+				.andWhere({ product_id: productId });
+
+			return result;
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	editProductQuantity = async (
+		userId: string,
+		productId: string,
+		quantity: number
+	) => {
+		try {
+			await this.connection('metabum_cart')
+				.update({
+					quantity: quantity,
+				})
+				.where({ user_id: userId })
+				.andWhere({ product_id: productId });
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
 }
