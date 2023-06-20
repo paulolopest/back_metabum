@@ -63,25 +63,55 @@ export class CartBusiness {
 		productId: string,
 		quantity: number
 	) => {
-		if (!token) {
-			throw new Error('Login first');
-		}
-		if (!productId) {
-			throw new Error('Enter a product id');
-		}
-		if (!quantity) {
-			throw new Error('Enter a quantity');
-		} else if (quantity <= 0) {
-			throw new Error('Enter a valid quantity');
-		}
+		try {
+			if (!token) {
+				throw new Error('Login first');
+			}
+			if (!productId) {
+				throw new Error('Enter a product id');
+			}
+			if (!quantity) {
+				throw new Error('Enter a quantity');
+			} else if (quantity <= 0) {
+				throw new Error('Enter a valid quantity');
+			}
 
-		const user = this.authenticator.getTokenData(token);
-		const existProduct = this.cartData.getProductInCart(user.id, productId);
+			const user = this.authenticator.getTokenData(token);
 
-		if (!existProduct) {
-			throw new Error('This product do not exist in this cart');
+			await this.cartData.editProductQuantity(user.id, productId, quantity);
+		} catch (error: any) {
+			throw new Error(error.message);
 		}
+	};
 
-		await this.cartData.editProductQuantity(user.id, productId, quantity);
+	removeProduct = async (token: string, productId: string) => {
+		try {
+			if (!token) {
+				throw new Error('Login first');
+			}
+			if (!productId) {
+				throw new Error('Enter a product id');
+			}
+
+			const user = this.authenticator.getTokenData(token);
+
+			await this.cartData.removeProduct(user.id, productId);
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	deleteCart = async (token: string) => {
+		try {
+			if (!token) {
+				throw new Error('Login first');
+			}
+
+			const user = this.authenticator.getTokenData(token);
+
+			await this.cartData.deleteCart(user.id);
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
 	};
 }

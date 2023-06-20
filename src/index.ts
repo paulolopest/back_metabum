@@ -31,3 +31,5 @@ app.get('/profile/purchases/boleto', paymentController.getBoletoPayment);
 app.post('/cart/add/:productId', cartController.addProduct);
 app.get('/cart/user', cartController.getUserCart);
 app.put('/cart/edit-quantity/:productId', cartController.editProductQuantity);
+app.delete('/cart/delete/:productId', cartController.removeProduct);
+app.delete('/cart/delete', cartController.deleteCart);

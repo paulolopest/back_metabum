@@ -53,4 +53,25 @@ export class CartData extends BaseDatabase {
 			throw new Error(error.message);
 		}
 	};
+
+	removeProduct = async (userId: string, productId: string) => {
+		try {
+			await this.connection('metabum_cart')
+				.delete()
+				.where({ user_id: userId })
+				.andWhere({ product_id: productId });
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	deleteCart = async (userId: string) => {
+		try {
+			await this.connection('metabum_cart')
+				.delete()
+				.where({ user_id: userId });
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
 }

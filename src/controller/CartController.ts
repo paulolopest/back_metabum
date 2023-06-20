@@ -47,4 +47,29 @@ export class CartController {
 			res.status(500).send(error.message || error.sqlMessage);
 		}
 	};
+
+	removeProduct = async (req: Request, res: Response) => {
+		try {
+			const token = req.headers.authorization as string;
+			const { productId } = req.params;
+
+			await this.cartBusiness.removeProduct(token, productId);
+
+			res.status(200).send('Product successfully removed');
+		} catch (error: any) {
+			res.status(500).send(error.message || error.sqlMessage);
+		}
+	};
+
+	deleteCart = async (req: Request, res: Response) => {
+		try {
+			const token = req.headers.authorization as string;
+
+			await this.cartBusiness.deleteCart(token);
+
+			res.status(200).send('Cart successfully deleted');
+		} catch (error: any) {
+			res.status(500).send(error.message || error.sqlMessage);
+		}
+	};
 }
