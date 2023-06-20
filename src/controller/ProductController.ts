@@ -58,6 +58,8 @@ export class ProductController {
 			const { quantity } = req.body;
 
 			await this.productBusiness.editQuantity(token, productId, quantity);
+
+			res.status(200).send('The product quantity was updated');
 		} catch (error: any) {
 			res.status(500).send(error.message || error.sqlMessage);
 		}

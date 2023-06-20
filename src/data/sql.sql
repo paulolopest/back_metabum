@@ -80,3 +80,13 @@ CREATE TABLE
 SELECT * FROM `metabum_boletoPayment`;
 
 DROP TABLE metabum_boletoPayment;
+
+CREATE TABLE
+    metabum_cart (
+        id VARCHAR(255) PRIMARY KEY,
+        user_id VARCHAR(255) NOT NULL,
+        product_id VARCHAR(255) NOT NULL,
+        quantity INT NOT NULL
+    );
+
+DROP TABLE metabum_cart;

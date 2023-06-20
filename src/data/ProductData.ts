@@ -24,6 +24,18 @@ export class ProductData extends BaseDatabase {
 		}
 	};
 
+	getProductById = async (productId: string) => {
+		try {
+			const result = await this.connection('metabum_products').where({
+				id: productId,
+			});
+
+			return result;
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
 	getProductByName = async (productName: string) => {
 		try {
 			const result = await this.connection('metabum_products')

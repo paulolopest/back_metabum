@@ -3,6 +3,7 @@ import {
 	productController,
 	paymentController,
 	userController,
+	cartController,
 } from './models/Classes';
 import { app } from './services/App';
 
@@ -26,3 +27,5 @@ app.post('/products/:productId/creditCard', paymentController.creditPayment);
 app.post('/products/:productId/boleto', paymentController.boletoPayment);
 app.get('/profile/purchases/credit_card', paymentController.getCardPayment);
 app.get('/profile/purchases/boleto', paymentController.getBoletoPayment);
+
+app.post('/cart/add/:productId', cartController.addProduct);

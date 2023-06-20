@@ -13,6 +13,9 @@ import { UserData } from '../data/UserData';
 import { Authenticator } from '../services/Authenticator';
 import { HashManager } from '../services/HashManager';
 import { IdGenerator } from '../services/IdGenerator';
+import { CartBusiness } from '../business/CartBusiness';
+import { CartData } from '../data/CartData';
+import { CartController } from '../controller/CartController';
 
 // User ---- User ---- User ---- User
 
@@ -56,3 +59,15 @@ export const paymentBusiness = new PaymentBusiness(
 );
 export const paymentController = new PaymentController(paymentBusiness);
 export const paymentData = new PaymentData();
+
+// Cart ------- Cart -------- Cart ------- Cart
+
+export const cartBusiness = new CartBusiness(
+	new Authenticator(),
+	new IdGenerator(),
+	new ProductData(),
+	new CartData()
+);
+
+export const cartController = new CartController(cartBusiness);
+export const cartData = new CartData();
