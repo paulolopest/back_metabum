@@ -16,6 +16,7 @@ export class ProductBusiness {
 		name: string,
 		src: string,
 		price: number,
+		quantity: number,
 		tags: string,
 		description: string,
 		token: string
@@ -36,6 +37,11 @@ export class ProductBusiness {
 		} else if (price <= 0) {
 			throw new Error('Enter a valid price');
 		}
+		if (!quantity) {
+			throw new Error('Enter a quantity');
+		} else if (quantity <= 0) {
+			throw new Error('Enter a valid quantity');
+		}
 		if (!tags) {
 			throw new Error('Enter a tags');
 		}
@@ -52,7 +58,7 @@ export class ProductBusiness {
 		const id = this.idGenerator.generateId();
 
 		await this.productData.insertProduct(
-			new Product(id, name, src, price, tags, description)
+			new Product(id, name, src, price, quantity, tags, description)
 		);
 	};
 

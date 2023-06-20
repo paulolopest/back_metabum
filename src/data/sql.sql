@@ -41,7 +41,8 @@ CREATE TABLE
         src VARCHAR(255) NOT NULL,
         price INT NOT NULL,
         quantity INT NOT NULL,
-        tags VARCHAR(255) NOT NULL
+        tags VARCHAR(255) NOT NULL,
+        description TEXT NOT NULL
     );
 
 DROP TABLE metabum_products;

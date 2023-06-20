@@ -8,6 +8,7 @@ export class ProductData extends BaseDatabase {
 			name: product.getName(),
 			src: product.getProductImg(),
 			price: product.getPrice(),
+			quantity: product.getQuantity(),
 			tags: product.getTags(),
 			description: product.getDescription(),
 		});
