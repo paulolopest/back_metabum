@@ -1,119 +1,125 @@
-import { UserData } from "../data/UserData"
-import { User } from "../models/User"
-import { Authenticator } from "../services/Authenticator"
-import { HashManager } from "../services/HashManager"
-import { IdGenerator } from "../services/IdGenerator"
+import { UserData } from '../data/UserData';
+import { User } from '../models/User';
+import { Authenticator } from '../services/Authenticator';
+import { HashManager } from '../services/HashManager';
+import { IdGenerator } from '../services/IdGenerator';
 
 export class UserBusiness {
-    constructor (
-        private authenticator: Authenticator,
-        private hashManager: HashManager,
-        private idGenerator: IdGenerator,
-        private userData: UserData,
-    ) {}
+	constructor(
+		private authenticator: Authenticator,
+		private hashManager: HashManager,
+		private idGenerator: IdGenerator,
+		private userData: UserData
+	) {}
 
-    signup = async(name: string, email: string, cpf: string, password: string) => {
-        if(!name) {
-            throw new Error("Enter a name")
-        }
-        if(!email) {
-            throw new Error("Enter an email")
-        } else if (email.indexOf("@") === -1) {
-            throw new Error("The email must contain an @")
-        }
+	signup = async (
+		name: string,
+		email: string,
+		cpf: string,
+		password: string
+	) => {
+		if (!name) {
+			throw new Error('Enter a name');
+		}
+		if (!email) {
+			throw new Error('Enter an email');
+		}
 
-        const user = await this.userData.getUserByEmail(email)
-        if(user) {
-            throw new Error("User already exist")
-        }
+		const user = await this.userData.getUserByEmail(email);
+		if (user) {
+			throw new Error('User already exist');
+		}
 
-        if(!cpf) {
-            throw new Error("Enter a CPF")
-        }
+		if (!cpf) {
+			throw new Error('Enter a CPF');
+		}
 
-        if(cpf.length != 11) {
-            throw new Error("The CPF must be equal 11 characters")
-        }
+		if (cpf.length != 11) {
+			throw new Error('The CPF must be equal 11 characters');
+		}
 
-        const cpfVerify = await this.userData.getUserByCpf(cpf)
-        if(cpfVerify) {
-            throw new Error("The cpf is already registered")
-        }
-        
-        if(!password) {
-            throw new Error("Enter a password")
-        } else if (password.length < 6) {
-            throw new Error("The password must be longer than 6 characteres")
-        }
+		const cpfVerify = await this.userData.getUserByCpf(cpf);
+		if (cpfVerify) {
+			throw new Error('The cpf is already registered');
+		}
 
-        const id: string = this.idGenerator.generateId()
-        const cypherPassword = await this.hashManager.generateHash(password)
+		if (!password) {
+			throw new Error('Enter a password');
+		} else if (password.length < 6) {
+			throw new Error('The password must be longer than 6 characteres');
+		}
 
-        await this.userData.signup(
-            new User(id, name, email, cypherPassword, cpf, "Normal")
-        )
+		const id: string = this.idGenerator.generateId();
+		const cypherPassword = await this.hashManager.generateHash(password);
 
-        const token = this.authenticator.generateToken({id: id})
+		await this.userData.signup(
+			new User(id, name, email, cypherPassword, cpf, 'Normal')
+		);
 
-        return token
-    }
+		const token = this.authenticator.generateToken({ id: id });
 
-    login = async(email: string, password: string) => {
-        if(!email) {
-            throw new Error("Enter an email")
-        }
-        if(!password) {
-            throw new Error("Invalid password")
-        } else if (password.length < 6) {
-            throw new Error("Invalid password")
-        }
+		return token;
+	};
 
-        const user = await this.userData.getUserByEmail(email)
-        if(!user) {
-            throw new Error("Account does not exist")
-        }
+	login = async (email: string, password: string) => {
+		if (!email) {
+			throw new Error('Enter an email');
+		}
+		if (!password) {
+			throw new Error('Invalid password');
+		} else if (password.length < 6) {
+			throw new Error('Invalid password');
+		}
 
-        const validatePassword = await this.hashManager.compareHash(password, user.password)
-        if(!validatePassword) {
-            throw new Error("Incorrect password")
-        }
+		const user = await this.userData.getUserByEmail(email);
+		if (!user) {
+			throw new Error('Account does not exist');
+		}
 
-        const token = this.authenticator.generateToken({id: user.id})
+		const validatePassword = await this.hashManager.compareHash(
+			password,
+			user.password
+		);
+		if (!validatePassword) {
+			throw new Error('Incorrect password');
+		}
 
-        return token
-    }
+		const token = this.authenticator.generateToken({ id: user.id });
 
-    getProfile = async(token: string): Promise<string[]> => {
-        if(!token) {
-            throw new Error("Login first")
-        }
-        const userId = this.authenticator.getTokenData(token)
+		return token;
+	};
 
-        const response = await this.userData.getProfile(userId.id)
+	getProfile = async (token: string): Promise<string[]> => {
+		if (!token) {
+			throw new Error('Login first');
+		}
+		const userId = this.authenticator.getTokenData(token);
 
-        return response
-    }
+		const response = await this.userData.getProfile(userId.id);
 
-    editProfileName = async(token: string, name: string) => {
-        if(!token) {
-            throw new Error("Login first")
-        }
-        if(!name) {
-            throw new Error("Enter a name")
-        }
+		return response;
+	};
 
-        const userId = this.authenticator.getTokenData(token)
+	editProfileName = async (token: string, name: string) => {
+		if (!token) {
+			throw new Error('Login first');
+		}
+		if (!name) {
+			throw new Error('Enter a name');
+		}
 
-        const response = await this.userData.editProfileName(userId.id, name)
-    }
+		const userId = this.authenticator.getTokenData(token);
 
-    deleteUser = async(token: string) => {
-        if(!token) {
-            throw new Error("Login first")
-        }
+		const response = await this.userData.editProfileName(userId.id, name);
+	};
 
-        const userId = this.authenticator.getTokenData(token)
+	deleteUser = async (token: string) => {
+		if (!token) {
+			throw new Error('Login first');
+		}
 
-        const response = await this.userData.deleteUser(userId.id)
-    }
+		const userId = this.authenticator.getTokenData(token);
+
+		const response = await this.userData.deleteUser(userId.id);
+	};
 }
