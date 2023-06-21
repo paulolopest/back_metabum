@@ -18,47 +18,51 @@ export class UserBusiness {
 		cpf: string,
 		password: string
 	) => {
-		if (!name) {
-			throw new Error('Enter a name');
+		try {
+			if (!name) {
+				throw new Error('Enter a name');
+			}
+			if (!email) {
+				throw new Error('Enter an email');
+			}
+
+			const user = await this.userData.getUserByEmail(email);
+			if (user) {
+				throw new Error('User already exist');
+			}
+
+			if (!cpf) {
+				throw new Error('Enter a CPF');
+			}
+
+			if (cpf.length != 11) {
+				throw new Error('The CPF must be equal 11 characters');
+			}
+
+			const cpfVerify = await this.userData.getUserByCpf(cpf);
+			if (cpfVerify) {
+				throw new Error('The cpf is already registered');
+			}
+
+			if (!password) {
+				throw new Error('Enter a password');
+			} else if (password.length < 6) {
+				throw new Error('The password must be longer than 6 characteres');
+			}
+
+			const id: string = this.idGenerator.generateId();
+			const cypherPassword = await this.hashManager.generateHash(password);
+
+			await this.userData.signup(
+				new User(id, name, email, cypherPassword, cpf, 'Normal')
+			);
+
+			const token = this.authenticator.generateToken({ id: id });
+
+			return token;
+		} catch (error: any) {
+			throw new Error(error.message);
 		}
-		if (!email) {
-			throw new Error('Enter an email');
-		}
-
-		const user = await this.userData.getUserByEmail(email);
-		if (user) {
-			throw new Error('User already exist');
-		}
-
-		if (!cpf) {
-			throw new Error('Enter a CPF');
-		}
-
-		if (cpf.length != 11) {
-			throw new Error('The CPF must be equal 11 characters');
-		}
-
-		const cpfVerify = await this.userData.getUserByCpf(cpf);
-		if (cpfVerify) {
-			throw new Error('The cpf is already registered');
-		}
-
-		if (!password) {
-			throw new Error('Enter a password');
-		} else if (password.length < 6) {
-			throw new Error('The password must be longer than 6 characteres');
-		}
-
-		const id: string = this.idGenerator.generateId();
-		const cypherPassword = await this.hashManager.generateHash(password);
-
-		await this.userData.signup(
-			new User(id, name, email, cypherPassword, cpf, 'Normal')
-		);
-
-		const token = this.authenticator.generateToken({ id: id });
-
-		return token;
 	};
 
 	login = async (email: string, password: string) => {
