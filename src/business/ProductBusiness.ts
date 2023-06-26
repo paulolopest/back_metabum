@@ -21,77 +21,93 @@ export class ProductBusiness {
 		description: string,
 		token: string
 	) => {
-		if (!token) {
-			throw new Error('Login First');
-		}
-		if (!name) {
-			throw new Error('Enter a name');
-		}
-		if (!src) {
-			throw new Error('Enter a link for an image');
-		} else if (src.indexOf('https://') === -1) {
-			throw new Error('Enter a valid link');
-		}
-		if (!price) {
-			throw new Error('Enter a price');
-		} else if (price <= 0) {
-			throw new Error('Enter a valid price');
-		}
-		if (!quantity) {
-			throw new Error('Enter a quantity');
-		} else if (quantity <= 0) {
-			throw new Error('Enter a valid quantity');
-		}
-		if (!tags) {
-			throw new Error('Enter a tags');
-		}
-		if (!description) {
-			throw new Error('Enter a description');
-		}
+		try {
+			if (!token) {
+				throw new Error('Login First');
+			}
+			if (!name) {
+				throw new Error('Enter a name');
+			}
+			if (!src) {
+				throw new Error('Enter a link for an image');
+			} else if (src.indexOf('https://') === -1) {
+				throw new Error('Enter a valid link');
+			}
+			if (!price) {
+				throw new Error('Enter a price');
+			} else if (price <= 0) {
+				throw new Error('Enter a valid price');
+			}
+			if (!quantity) {
+				throw new Error('Enter a quantity');
+			} else if (quantity <= 0) {
+				throw new Error('Enter a valid quantity');
+			}
+			if (!tags) {
+				throw new Error('Enter a tags');
+			}
+			if (!description) {
+				throw new Error('Enter a description');
+			}
 
-		const userId = this.authenticator.getTokenData(token);
-		const identify = await this.userData.getUserById(userId.id);
+			const userId = this.authenticator.getTokenData(token);
+			const identify = await this.userData.getUserById(userId.id);
 
-		if (identify.role != 'Administrator') {
-			throw new Error('Just admin can insert products');
+			if (identify.role != 'Administrator') {
+				throw new Error('Just admin can insert products');
+			}
+			const id = this.idGenerator.generateId();
+
+			await this.productData.insertProduct(
+				new Product(id, name, src, price, quantity, tags, description)
+			);
+		} catch (error: any) {
+			throw new Error(error.message);
 		}
-		const id = this.idGenerator.generateId();
-
-		await this.productData.insertProduct(
-			new Product(id, name, src, price, quantity, tags, description)
-		);
 	};
 
 	getProducts = async () => {
-		const response = await this.productData.getProducts();
+		try {
+			const response = await this.productData.getProducts();
 
-		return response;
+			return response;
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
 	};
 
 	getProductById = async (id: string) => {
-		const response = await this.productData.getProductById(id);
+		try {
+			const response = await this.productData.getProductById(id);
 
-		return response;
+			return response;
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
 	};
 
 	editPrice = async (token: string, price: number, productId: string) => {
-		if (!token) {
-			throw new Error('Login first');
-		}
-		if (!productId) {
-			throw new Error('Enter a product id');
-		}
-		if (!price) {
-			throw new Error('Enter a price');
-		}
+		try {
+			if (!token) {
+				throw new Error('Login first');
+			}
+			if (!productId) {
+				throw new Error('Enter a product id');
+			}
+			if (!price) {
+				throw new Error('Enter a price');
+			}
 
-		const userId = this.authenticator.getTokenData(token);
-		const identify = await this.userData.getUserById(userId.id);
+			const userId = this.authenticator.getTokenData(token);
+			const identify = await this.userData.getUserById(userId.id);
 
-		if (identify.role != 'Administrator') {
-			throw new Error('Just administrator can edit the price');
+			if (identify.role != 'Administrator') {
+				throw new Error('Just administrator can edit the price');
+			}
+			await this.productData.editPrice(price, productId);
+		} catch (error: any) {
+			throw new Error(error.message);
 		}
-		await this.productData.editPrice(price, productId);
 	};
 
 	editQuantity = async (
@@ -99,41 +115,49 @@ export class ProductBusiness {
 		productId: string,
 		quantity: number
 	) => {
-		if (!token) {
-			throw new Error('Login first');
-		}
-		if (!productId) {
-			throw new Error('Enter a product id');
-		}
-		if (!quantity) {
-			throw new Error('Enter a quantity');
-		}
+		try {
+			if (!token) {
+				throw new Error('Login first');
+			}
+			if (!productId) {
+				throw new Error('Enter a product id');
+			}
+			if (!quantity) {
+				throw new Error('Enter a quantity');
+			}
 
-		const { id } = this.authenticator.getTokenData(token);
-		const identify = await this.userData.getUserById(id);
+			const { id } = this.authenticator.getTokenData(token);
+			const identify = await this.userData.getUserById(id);
 
-		if (identify.role != 'Administrator') {
-			throw new Error('Only admins can edit the quantity');
+			if (identify.role != 'Administrator') {
+				throw new Error('Only admins can edit the quantity');
+			}
+
+			await this.productData.editQuantity(productId, quantity);
+		} catch (error: any) {
+			throw new Error(error.message);
 		}
-
-		await this.productData.editQuantity(productId, quantity);
 	};
 
 	deleteProduct = async (token: string, productId: string) => {
-		if (!token) {
-			throw new Error('Login first');
-		}
-		if (!productId) {
-			throw new Error('Enter a product id');
-		}
+		try {
+			if (!token) {
+				throw new Error('Login first');
+			}
+			if (!productId) {
+				throw new Error('Enter a product id');
+			}
 
-		const userId = this.authenticator.getTokenData(token);
-		const identify = await this.userData.getUserById(userId.id);
+			const userId = this.authenticator.getTokenData(token);
+			const identify = await this.userData.getUserById(userId.id);
 
-		if (identify.role != 'Administrator') {
-			throw new Error('Just admin can delete product');
+			if (identify.role != 'Administrator') {
+				throw new Error('Just admin can delete product');
+			}
+
+			await this.productData.deleteProduct(productId);
+		} catch (error: any) {
+			throw new Error(error.message);
 		}
-
-		await this.productData.deleteProduct(productId);
 	};
 }

@@ -3,15 +3,19 @@ import { BaseDatabase } from './BaseDatabase';
 
 export class ProductData extends BaseDatabase {
 	insertProduct = async (product: Product) => {
-		await this.connection('metabum_products').insert({
-			id: product.getId(),
-			name: product.getName(),
-			src: product.getProductImg(),
-			price: product.getPrice(),
-			quantity: product.getQuantity(),
-			tags: product.getTags(),
-			description: product.getDescription(),
-		});
+		try {
+			await this.connection('metabum_products').insert({
+				id: product.getId(),
+				name: product.getName(),
+				src: product.getProductImg(),
+				price: product.getPrice(),
+				quantity: product.getQuantity(),
+				tags: product.getTags(),
+				description: product.getDescription(),
+			});
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
 	};
 
 	getProducts = async () => {

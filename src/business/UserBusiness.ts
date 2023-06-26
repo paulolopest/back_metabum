@@ -66,64 +66,80 @@ export class UserBusiness {
 	};
 
 	login = async (email: string, password: string) => {
-		if (!email) {
-			throw new Error('Enter an email');
-		}
-		if (!password) {
-			throw new Error('Invalid password');
-		} else if (password.length < 6) {
-			throw new Error('Invalid password');
-		}
+		try {
+			if (!email) {
+				throw new Error('Enter an email');
+			}
+			if (!password) {
+				throw new Error('Invalid password');
+			} else if (password.length < 6) {
+				throw new Error('Invalid password');
+			}
 
-		const user = await this.userData.getUserByEmail(email);
-		if (!user) {
-			throw new Error('Account does not exist');
+			const user = await this.userData.getUserByEmail(email);
+			if (!user) {
+				throw new Error('Account does not exist');
+			}
+
+			const validatePassword = await this.hashManager.compareHash(
+				password,
+				user.password
+			);
+			if (!validatePassword) {
+				throw new Error('Incorrect password');
+			}
+
+			const token = this.authenticator.generateToken({ id: user.id });
+
+			return token;
+		} catch (error: any) {
+			throw new Error(error.message);
 		}
-
-		const validatePassword = await this.hashManager.compareHash(
-			password,
-			user.password
-		);
-		if (!validatePassword) {
-			throw new Error('Incorrect password');
-		}
-
-		const token = this.authenticator.generateToken({ id: user.id });
-
-		return token;
 	};
 
 	getProfile = async (token: string): Promise<string[]> => {
-		if (!token) {
-			throw new Error('Login first');
+		try {
+			if (!token) {
+				throw new Error('Login first');
+			}
+			const userId = this.authenticator.getTokenData(token);
+
+			const response = await this.userData.getProfile(userId.id);
+
+			return response;
+		} catch (error: any) {
+			throw new Error(error.message);
 		}
-		const userId = this.authenticator.getTokenData(token);
-
-		const response = await this.userData.getProfile(userId.id);
-
-		return response;
 	};
 
 	editProfileName = async (token: string, name: string) => {
-		if (!token) {
-			throw new Error('Login first');
-		}
-		if (!name) {
-			throw new Error('Enter a name');
-		}
+		try {
+			if (!token) {
+				throw new Error('Login first');
+			}
+			if (!name) {
+				throw new Error('Enter a name');
+			}
 
-		const userId = this.authenticator.getTokenData(token);
+			const userId = this.authenticator.getTokenData(token);
 
-		const response = await this.userData.editProfileName(userId.id, name);
+			const response = await this.userData.editProfileName(userId.id, name);
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
 	};
 
 	deleteUser = async (token: string) => {
-		if (!token) {
-			throw new Error('Login first');
+		try {
+			if (!token) {
+				throw new Error('Login first');
+			}
+
+			const userId = this.authenticator.getTokenData(token);
+
+			const response = await this.userData.deleteUser(userId.id);
+		} catch (error: any) {
+			throw new Error(error.message);
 		}
-
-		const userId = this.authenticator.getTokenData(token);
-
-		const response = await this.userData.deleteUser(userId.id);
 	};
 }
