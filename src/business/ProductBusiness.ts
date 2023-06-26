@@ -62,18 +62,16 @@ export class ProductBusiness {
 		);
 	};
 
-	getProducts = async (productName: string) => {
-		if (!productName) {
-			const response = await this.productData.getProducts();
+	getProducts = async () => {
+		const response = await this.productData.getProducts();
 
-			return response;
-		}
+		return response;
+	};
 
-		if (productName) {
-			const result = await this.productData.getProductByName(productName);
+	getProductById = async (id: string) => {
+		const response = await this.productData.getProductById(id);
 
-			return result;
-		}
+		return response;
 	};
 
 	editPrice = async (token: string, price: number, productId: string) => {

@@ -19,6 +19,7 @@ app.delete('/user/card/:cardId', cardController.deleteCard);
 
 app.post('/insertProduct', productController.insertProduct);
 app.get('/products', productController.getProducts);
+app.get('/products/:id', productController.getProductById);
 app.put('/product/:productId/edit', productController.editPrice);
 app.delete('/product/:productId', productController.deleteProduct);
 app.put('/product/edit-quantity/:productId', productController.editQuantity);

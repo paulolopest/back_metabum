@@ -26,10 +26,18 @@ export class ProductController {
 
 	getProducts = async (req: Request, res: Response) => {
 		try {
-			const { productName } = req.query;
-			const response = await this.productBusiness.getProducts(
-				productName as string
-			);
+			const response = await this.productBusiness.getProducts();
+
+			res.send(response);
+		} catch (error: any) {
+			res.status(500).send(error.message || error.sqlMessage);
+		}
+	};
+
+	getProductById = async (req: Request, res: Response) => {
+		try {
+			const { id } = req.params;
+			const response = await this.productBusiness.getProductById(id);
 
 			res.send(response);
 		} catch (error: any) {
