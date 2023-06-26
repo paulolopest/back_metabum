@@ -36,7 +36,7 @@ export class ProductController {
 
 	getProductById = async (req: Request, res: Response) => {
 		try {
-			const { id } = req.params;
+			const { id } = req.body;
 			const response = await this.productBusiness.getProductById(id);
 
 			res.send(response);
