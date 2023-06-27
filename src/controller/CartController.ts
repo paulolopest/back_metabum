@@ -8,9 +8,8 @@ export class CartController {
 		try {
 			const token = req.headers.authorization as string;
 			const { productId } = req.params;
-			const { quantity } = req.body;
 
-			await this.cartBusiness.addProduct(token, productId, quantity);
+			await this.cartBusiness.addProduct(token, productId);
 
 			res.status(201).send('Product successfully added in cart');
 		} catch (error: any) {

@@ -12,18 +12,13 @@ export class CartBusiness {
 		private cartData: CartData
 	) {}
 
-	addProduct = async (token: string, productId: string, quantity: number) => {
+	addProduct = async (token: string, productId: string) => {
 		try {
 			if (!token) {
 				throw new Error('Login first');
 			}
 			if (!productId) {
 				throw new Error('Enter a product id');
-			}
-			if (!quantity) {
-				throw new Error('Enter a quantity');
-			} else if (quantity <= 0) {
-				throw new Error('Enter a valid quantity');
 			}
 
 			const product = await this.productData.getProductById(productId);
@@ -40,7 +35,7 @@ export class CartBusiness {
 					product.src,
 					product.name,
 					product.price,
-					quantity
+					1
 				)
 			);
 		} catch (error: any) {
