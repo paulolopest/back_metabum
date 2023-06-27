@@ -26,16 +26,22 @@ export class CartBusiness {
 				throw new Error('Enter a valid quantity');
 			}
 
-			const product = this.productData.getProductById(productId);
+			const product = await this.productData.getProductById(productId);
 			if (!product) {
 				throw new Error('Enter a valid product');
 			}
 
 			const user = this.authenticator.getTokenData(token);
-			const cartId = this.idGenerator.generateId();
 
 			await this.cartData.addProduct(
-				new Cart(cartId, user.id, productId, quantity)
+				new Cart(
+					user.id,
+					productId,
+					product.src,
+					product.name,
+					product.price,
+					quantity
+				)
 			);
 		} catch (error: any) {
 			throw new Error(error.message);

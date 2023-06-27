@@ -83,9 +83,11 @@ DROP TABLE metabum_boletoPayment;
 
 CREATE TABLE
     metabum_cart (
-        id VARCHAR(255) PRIMARY KEY,
         user_id VARCHAR(255) NOT NULL,
         product_id VARCHAR(255) NOT NULL,
+        product_src VARCHAR(255) NOT NULL,
+        product_name VARCHAR(255) NOT NULL,
+        product_price INT NOT NULL,
         quantity INT NOT NULL
     );
 
