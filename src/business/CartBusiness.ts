@@ -27,17 +27,30 @@ export class CartBusiness {
 			}
 
 			const user = this.authenticator.getTokenData(token);
+			const cart = await this.getUserCart(token);
 
-			await this.cartData.addProduct(
-				new Cart(
+			const searchProduct = await this.cartData.getProductInCart(
+				user.id,
+				productId
+			);
+			if (!searchProduct) {
+				await this.cartData.addProduct(
+					new Cart(
+						user.id,
+						productId,
+						product.src,
+						product.name,
+						product.price,
+						1
+					)
+				);
+			} else {
+				await this.cartData.editProductQuantity(
 					user.id,
 					productId,
-					product.src,
-					product.name,
-					product.price,
-					1
-				)
-			);
+					searchProduct.quantity + 1
+				);
+			}
 		} catch (error: any) {
 			throw new Error(error.message);
 		}
