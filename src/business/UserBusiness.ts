@@ -97,6 +97,18 @@ export class UserBusiness {
 		}
 	};
 
+	validateToken = async (token: string) => {
+		try {
+			if (!token) throw new Error('Login first');
+
+			const validateToken = this.authenticator.getTokenData(token);
+
+			if (!validateToken) throw new Error('Invalid credentials');
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
 	getProfile = async (token: string): Promise<string[]> => {
 		try {
 			if (!token) {

@@ -12,6 +12,7 @@ app.post('/login', userController.login);
 app.get('/profile', userController.getProfile);
 app.put('/profile/edit', userController.editProfileName);
 app.delete('/user/profile', userController.deleteUser);
+app.get('/token/validate-token', userController.validateToken);
 
 app.post('/user/registerCard', cardController.createCard);
 app.get('/user/cards', cardController.getAllCards);

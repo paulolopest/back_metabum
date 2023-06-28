@@ -31,6 +31,17 @@ export class UserController {
 		}
 	};
 
+	validateToken = async (req: Request, res: Response) => {
+		try {
+			const { token } = req.body;
+			const response = await this.userBusiness.validateToken(token);
+
+			res.status(200).send('Valid token');
+		} catch (error: any) {
+			res.status(500).send(error.message || error.sqlMessage);
+		}
+	};
+
 	getProfile = async (req: Request, res: Response) => {
 		try {
 			const token = req.headers.authorization as string;
