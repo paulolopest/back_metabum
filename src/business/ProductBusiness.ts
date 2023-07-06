@@ -14,6 +14,7 @@ export class ProductBusiness {
 
 	insertProduct = async (
 		name: string,
+		brand: string,
 		src: string,
 		price: number,
 		quantity: number,
@@ -22,12 +23,11 @@ export class ProductBusiness {
 		token: string
 	) => {
 		try {
-			if (!token) {
-				throw new Error('Login First');
-			}
-			if (!name) {
-				throw new Error('Enter a name');
-			}
+			if (!token) throw new Error('Login First');
+
+			if (!name) throw new Error('Enter a name');
+
+			if (!brand) throw new Error('Enter a brand');
 			if (!src) {
 				throw new Error('Enter a link for an image');
 			} else if (src.indexOf('https://') === -1) {
@@ -43,12 +43,9 @@ export class ProductBusiness {
 			} else if (quantity <= 0) {
 				throw new Error('Enter a valid quantity');
 			}
-			if (!tags) {
-				throw new Error('Enter a tags');
-			}
-			if (!description) {
-				throw new Error('Enter a description');
-			}
+			if (!tags) throw new Error('Enter a tags');
+
+			if (!description) throw new Error('Enter a description');
 
 			const userId = this.authenticator.getTokenData(token);
 			const identify = await this.userData.getUserById(userId.id);
@@ -59,7 +56,16 @@ export class ProductBusiness {
 			const id = this.idGenerator.generateId();
 
 			await this.productData.insertProduct(
-				new Product(id, name, src, price, quantity, tags, description)
+				new Product(
+					id,
+					name,
+					brand,
+					src,
+					price,
+					quantity,
+					tags,
+					description
+				)
 			);
 		} catch (error: any) {
 			throw new Error(error.message);

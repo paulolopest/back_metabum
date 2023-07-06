@@ -2,6 +2,7 @@ export class Product {
 	constructor(
 		private id: string,
 		private name: string,
+		private brand: string,
 		private src: string,
 		private price: number,
 		private quantity: number,
@@ -14,6 +15,9 @@ export class Product {
 	}
 	getName(): any {
 		return this.name;
+	}
+	getBrand(): any {
+		return this.brand;
 	}
 	getProductImg(): any {
 		return this.src;

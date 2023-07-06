@@ -7,6 +7,7 @@ export class ProductData extends BaseDatabase {
 			await this.connection('metabum_products').insert({
 				id: product.getId(),
 				name: product.getName(),
+				brand: product.getBrand(),
 				src: product.getProductImg(),
 				price: product.getPrice(),
 				quantity: product.getQuantity(),
