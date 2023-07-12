@@ -1,17 +1,7 @@
 import express, { Router } from 'express';
-import { UserData } from '../../Data/User/UserData';
-import { HashManager } from '../../Services/HashManager';
-import { IdGenerator } from '../../Services/IdGenerator';
-import { Authenticator } from '../../Services/Authenticator';
-import { UserBusiness } from '../../Business/User/UserBusiness';
 import { UserController } from '../../Controller/User/UserController';
+import { userBusiness } from '../../Models/Classes';
 
-const userBusiness: UserBusiness = new UserBusiness(
-	new Authenticator(),
-	new HashManager(),
-	new IdGenerator(),
-	new UserData()
-);
 const userController: UserController = new UserController(userBusiness);
 
 export const userRouter: Router = express.Router();
