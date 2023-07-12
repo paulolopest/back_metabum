@@ -62,6 +62,18 @@ SELECT * FROM metabum_cart;
 
 DROP TABLE metabum_cart;
 
+CREATE TABLE
+    metabum_favorites (
+        user_id VARCHAR(255) NOT NULL,
+        product_id VARCHAR(255) NOT NULL PRIMARY KEY,
+        product_src VARCHAR(255) NOT NULL,
+        product_name VARCHAR(255) NOT NULL,
+        product_brand VARCHAR(255) NOT NULL,
+        product_price INT NOT NULL
+    );
+
+DROP TABLE metabum_favorites;
+
 -- CREATE TABLE
 
 --     metabum_creditPayment (
