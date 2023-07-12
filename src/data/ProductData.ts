@@ -1,4 +1,5 @@
 import { Product } from '../models/Product';
+import { ProductDescription } from '../models/ProductDescription';
 import { BaseDatabase } from './BaseDatabase';
 
 export class ProductData extends BaseDatabase {
@@ -13,6 +14,34 @@ export class ProductData extends BaseDatabase {
 				quantity: product.getQuantity(),
 				tags: product.getTags(),
 			});
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	addDescription = async (description: ProductDescription) => {
+		try {
+			await this.connection('metabum_products_description').insert({
+				id: description.getId(),
+				product_id: description.getProductId(),
+				title: description.getTitle(),
+				description: description.getDescription(),
+				img: description.getImg(),
+			});
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	getDescriptions = async (productId: string) => {
+		try {
+			const response = await this.connection(
+				'metabum_products_description'
+			).where({
+				product_id: productId,
+			});
+
+			return response;
 		} catch (error: any) {
 			throw new Error(error.message);
 		}
@@ -72,9 +101,40 @@ export class ProductData extends BaseDatabase {
 		}
 	};
 
+	editDescription = async (
+		descriptionId: string,
+		title?: string,
+		description?: string,
+		img?: string
+	) => {
+		try {
+			await this.connection('metabum_products_description')
+				.update({
+					title: title,
+					description: description,
+					img: img,
+				})
+				.where({
+					id: descriptionId,
+				});
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	deleteDescription = async (descriptionId: string) => {
+		try {
+			await this.connection('metabum_products_description').delete().where({
+				id: descriptionId,
+			});
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
 	deleteProduct = async (productId: string) => {
 		try {
-			const response = await this.connection('metabum_products')
+			await this.connection('metabum_products')
 				.delete()
 				.where({ id: productId });
 		} catch (error: any) {

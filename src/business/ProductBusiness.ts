@@ -1,6 +1,8 @@
 import { ProductData } from '../data/ProductData';
 import { UserData } from '../data/UserData';
+import { AuthenticationData } from '../models/AuthenticationData';
 import { Product } from '../models/Product';
+import { ProductDescription } from '../models/ProductDescription';
 import { Authenticator } from '../services/Authenticator';
 import { IdGenerator } from '../services/IdGenerator';
 
@@ -55,6 +57,49 @@ export class ProductBusiness {
 			await this.productData.insertProduct(
 				new Product(id, name, brand, src, price, quantity, tags)
 			);
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	addDescription = async (
+		token: string,
+		productId: string,
+		title: string,
+		description: string,
+		img: string
+	) => {
+		try {
+			if (!token) throw new Error('Login first');
+			if (!productId) throw new Error('Enter a product id');
+			if (!title) throw new Error('Enter a title');
+			if (!description) throw new Error('Enter a description');
+
+			const user: AuthenticationData =
+				this.authenticator.getTokenData(token);
+			const identify = await this.userData.getUserById(user.id);
+
+			if (identify.role !== 'Administrator') {
+				throw new Error('Just admin can add description');
+			}
+
+			const id = this.idGenerator.generateId();
+
+			await this.productData.addDescription(
+				new ProductDescription(id, productId, title, description, img)
+			);
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	getDescriptions = async (productId: string) => {
+		try {
+			if (!productId) throw new Error('Enter a product id');
+
+			const response = await this.productData.getDescriptions(productId);
+
+			return response;
 		} catch (error: any) {
 			throw new Error(error.message);
 		}
@@ -128,6 +173,54 @@ export class ProductBusiness {
 			}
 
 			await this.productData.editQuantity(productId, quantity);
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	editDescription = async (
+		token: string,
+		descriptionId: string,
+		title?: string,
+		description?: string,
+		img?: string
+	) => {
+		try {
+			if (!token) throw new Error('Login first');
+			if (!descriptionId) throw new Error('Enter a description id');
+
+			const user = this.authenticator.getTokenData(token);
+			const identify = await this.userData.getUserById(user.id);
+
+			if (identify.role !== 'Administrator') {
+				throw new Error('Just admins can edit descriptions');
+			}
+
+			await this.productData.editDescription(
+				descriptionId,
+
+				title,
+				description,
+				img
+			);
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	deleteDescription = async (token: string, descriptionId: string) => {
+		try {
+			if (!token) throw new Error('Login first');
+			if (!descriptionId) throw new Error('Enter a description id');
+
+			const user = this.authenticator.getTokenData(token);
+			const identify = await this.userData.getUserById(user.id);
+
+			if (identify.role !== 'Administrator') {
+				throw new Error('Just admins can delete descriptions');
+			}
+
+			await this.productData.deleteDescription(descriptionId);
 		} catch (error: any) {
 			throw new Error(error.message);
 		}

@@ -19,11 +19,15 @@ app.get('/user/cards', cardController.getAllCards);
 app.delete('/user/card/:cardId', cardController.deleteCard);
 
 app.post('/insertProduct', productController.insertProduct);
+app.post('/:productId/add-description', productController.addDescription);
 app.get('/products', productController.getProducts);
+app.get('/:productId/description', productController.getDescriptions);
 app.get('/products/:id', productController.getProductById);
 app.put('/product/:productId/edit', productController.editPrice);
-app.delete('/product/:productId', productController.deleteProduct);
 app.put('/product/edit-quantity/:productId', productController.editQuantity);
+app.put('/:descriptionId/edit-description', productController.editDescription);
+app.delete('/product/:productId', productController.deleteProduct);
+app.delete('/:descriptionId/delete', productController.deleteDescription);
 
 app.post('/products/:productId/creditCard', paymentController.creditPayment);
 app.post('/products/:productId/boleto', paymentController.boletoPayment);

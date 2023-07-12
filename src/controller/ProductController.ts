@@ -6,7 +6,7 @@ export class ProductController {
 
 	insertProduct = async (req: Request, res: Response) => {
 		try {
-			const token = req.headers.authorization as string;
+			const token: string = req.headers.authorization as string;
 			const { name, brand, src, price, quantity, tags } = req.body;
 			await this.productBusiness.insertProduct(
 				name,
@@ -19,6 +19,37 @@ export class ProductController {
 			);
 
 			res.status(201).send('Product added to stock');
+		} catch (error: any) {
+			res.status(500).send(error.message || error.sqlMessage);
+		}
+	};
+
+	addDescription = async (req: Request, res: Response) => {
+		try {
+			const token: string = req.headers.authorization as string;
+			const { title, description, img } = req.body;
+			const { productId } = req.params;
+
+			await this.productBusiness.addDescription(
+				token,
+				productId,
+				title,
+				description,
+				img
+			);
+
+			res.status(201).send('Description added');
+		} catch (error: any) {
+			res.status(500).send(error.message || error.sqlMessage);
+		}
+	};
+
+	getDescriptions = async (req: Request, res: Response) => {
+		try {
+			const { productId } = req.params;
+			const response = await this.productBusiness.getDescriptions(productId);
+
+			res.send(response);
 		} catch (error: any) {
 			res.status(500).send(error.message || error.sqlMessage);
 		}
@@ -47,7 +78,7 @@ export class ProductController {
 
 	editPrice = async (req: Request, res: Response) => {
 		try {
-			const token = req.headers.authorization as string;
+			const token: string = req.headers.authorization as string;
 			const productId = req.params.productId;
 			const { price } = req.body;
 
@@ -61,8 +92,8 @@ export class ProductController {
 
 	editQuantity = async (req: Request, res: Response) => {
 		try {
-			const token = req.headers.authorization as string;
-			const productId = req.params.productId;
+			const token: string = req.headers.authorization as string;
+			const { productId } = req.params;
 			const { quantity } = req.body;
 
 			await this.productBusiness.editQuantity(token, productId, quantity);
@@ -73,16 +104,45 @@ export class ProductController {
 		}
 	};
 
-	deleteProduct = async (req: Request, res: Response) => {
+	editDescription = async (req: Request, res: Response) => {
 		try {
-			const token = req.headers.authorization as string;
-			const productId = req.params.productId;
-			const response = await this.productBusiness.deleteProduct(
+			const token: string = req.headers.authorization as string;
+			const { descriptionId } = req.params;
+			const { title, description, img } = req.body;
+
+			await this.productBusiness.editDescription(
 				token,
-				productId
+				descriptionId,
+				title,
+				description,
+				img
 			);
 
-			res.send('Product deleted');
+			res.status(200).send('Description updated');
+		} catch (error: any) {
+			res.status(500).send(error.message || error.sqlMessage);
+		}
+	};
+
+	deleteDescription = async (req: Request, res: Response) => {
+		try {
+			const token: string = req.headers.authorization as string;
+			const { descriptionId } = req.params;
+			await this.productBusiness.deleteDescription(token, descriptionId);
+
+			res.status(200).send('Description successfully deleted');
+		} catch (error: any) {
+			res.status(500).send(error.message || error.sqlMessage);
+		}
+	};
+
+	deleteProduct = async (req: Request, res: Response) => {
+		try {
+			const token: string = req.headers.authorization as string;
+			const productId = req.params.productId;
+			await this.productBusiness.deleteProduct(token, productId);
+
+			res.status(200).send('Product successfully deleted');
 		} catch (error: any) {
 			res.status(500).send(error.message || error.sqlMessage);
 		}
