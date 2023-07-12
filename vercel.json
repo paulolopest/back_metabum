@@ -9,7 +9,7 @@
     "routes": [
         {
             "src": "(.*)",
-            "dest": ["src/Router/User/UserRouter.ts", "src/Router/Cart/CartRouter.ts", "src/Router/Product/ProductRouter.ts", "src/Router/Card/CardRouter.ts", "src/Router/FavoriteProduct/FavoriteProductRouter.ts"]
+            "dest": "src/index.ts"
         }
     ]
 }

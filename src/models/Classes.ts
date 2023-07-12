@@ -1,14 +1,11 @@
 import { CardBusiness } from '../Business/Card/CardBusiness';
 import { ProductBusiness } from '../Business/Product/ProductBusiness';
-import { PaymentBusiness } from '../Business/PaymentBusiness';
 import { UserBusiness } from '../Business/User/UserBusiness';
 import { CardController } from '../Controller/Card/CardController';
 import { ProductController } from '../Controller/Product/ProductController';
-import { PaymentController } from '../Controller/PaymentController';
 import { UserController } from '../Controller/User/UserController';
 import { CardData } from '../Data/Card/CardData';
 import { ProductData } from '../Data/Product/ProductData';
-import { PaymentData } from '../Data/PaymentData';
 import { UserData } from '../Data/User/UserData';
 import { Authenticator } from '../Services/Authenticator';
 import { HashManager } from '../Services/HashManager';
@@ -49,16 +46,6 @@ export const productBusiness = new ProductBusiness(
 );
 export const productController = new ProductController(productBusiness);
 export const productData = new ProductData();
-
-// Payment ---- Payment ---- Payment ---- Payment
-
-export const paymentBusiness = new PaymentBusiness(
-	new Authenticator(),
-	new IdGenerator(),
-	new PaymentData()
-);
-export const paymentController = new PaymentController(paymentBusiness);
-export const paymentData = new PaymentData();
 
 // Cart ------- Cart -------- Cart ------- Cart
 
