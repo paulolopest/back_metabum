@@ -1,41 +1,23 @@
-import {
-	cardController,
-	productController,
-	paymentController,
-	userController,
-	cartController,
-} from './models/Classes';
-import { app } from './services/App';
+import express, { Express } from 'express';
+import cors from 'cors';
+import { userRouter } from './Router/User/UserRouter';
+import { cartRouter } from './Router/Cart/CartRouter';
+import { productRouter } from './Router/Product/ProductRouter';
+import { cardRouter } from './Router/Card/CardRouter';
 
-app.post('/signup', userController.signup);
-app.post('/login', userController.login);
-app.get('/profile', userController.getProfile);
-app.put('/profile/edit', userController.editProfileName);
-app.delete('/user/profile', userController.deleteUser);
-app.post('/token/validate-token', userController.validateToken);
+const port = process.env.PORT || 3000;
+const app: Express = express();
 
-app.post('/user/registerCard', cardController.createCard);
-app.get('/user/cards', cardController.getAllCards);
-app.delete('/user/card/:cardId', cardController.deleteCard);
+app.use(express.json());
+app.use(cors());
 
-app.post('/insertProduct', productController.insertProduct);
-app.post('/:productId/add-description', productController.addDescription);
-app.get('/products', productController.getProducts);
-app.get('/:productId/description', productController.getDescriptions);
-app.get('/products/:id', productController.getProductById);
-app.put('/product/:productId/edit', productController.editPrice);
-app.put('/product/edit-quantity/:productId', productController.editQuantity);
-app.put('/:descriptionId/edit-description', productController.editDescription);
-app.delete('/product/:productId', productController.deleteProduct);
-app.delete('/:descriptionId/delete', productController.deleteDescription);
+const server = app.listen(port, () => {
+	if (server) {
+		console.log(`The server is running on localhost:${port}`);
+	} else console.log('Error running the server');
+});
 
-app.post('/products/:productId/creditCard', paymentController.creditPayment);
-app.post('/products/:productId/boleto', paymentController.boletoPayment);
-app.get('/profile/purchases/credit_card', paymentController.getCardPayment);
-app.get('/profile/purchases/boleto', paymentController.getBoletoPayment);
-
-app.post('/cart/add/:productId', cartController.addProduct);
-app.get('/cart/user', cartController.getUserCart);
-app.put('/cart/edit-quantity/:productId', cartController.editProductQuantity);
-app.delete('/cart/delete/:productId', cartController.removeProduct);
-app.delete('/cart/delete', cartController.deleteCart);
+app.use(userRouter);
+app.use(cartRouter);
+app.use(cardRouter);
+app.use(productRouter);

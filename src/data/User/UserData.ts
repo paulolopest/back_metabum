@@ -1,5 +1,5 @@
-import { User } from '../models/User';
-import { BaseDatabase } from './BaseDatabase';
+import { User } from '../../Models/User';
+import { BaseDatabase } from '../BaseDatabase';
 
 export class UserData extends BaseDatabase {
 	signup = async (user: User) => {
@@ -78,9 +78,7 @@ export class UserData extends BaseDatabase {
 
 	deleteUser = async (userId: string) => {
 		try {
-			const response = await this.connection('metabum_users')
-				.delete()
-				.where({ id: userId });
+			await this.connection('metabum_users').delete().where({ id: userId });
 		} catch (error: any) {
 			throw new Error(error.message);
 		}

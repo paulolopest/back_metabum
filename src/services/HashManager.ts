@@ -13,8 +13,8 @@ export class HashManager {
 
 	compareHash = (
 		password: string,
-		cypherPassword: string
+		hashedPassword: string
 	): Promise<boolean> => {
-		return bcrypt.compare(password, cypherPassword);
+		return bcrypt.compare(password, hashedPassword);
 	};
 }

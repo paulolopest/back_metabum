@@ -1,5 +1,5 @@
-import { Cart } from '../models/Cart';
-import { BaseDatabase } from './BaseDatabase';
+import { Cart } from '../../Models/Cart';
+import { BaseDatabase } from '../BaseDatabase';
 
 export class CartData extends BaseDatabase {
 	addProduct = async (cart: Cart) => {

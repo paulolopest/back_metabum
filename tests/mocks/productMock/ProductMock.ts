@@ -1,4 +1,4 @@
-import { Product } from '../../../src/models/Product';
+import { Product } from '../../../src/Models/Product';
 
 export const productMock = new Product(
 	'mocked_productId',

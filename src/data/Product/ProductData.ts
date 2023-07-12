@@ -1,6 +1,6 @@
-import { Product } from '../models/Product';
-import { ProductDescription } from '../models/ProductDescription';
-import { BaseDatabase } from './BaseDatabase';
+import { Product } from '../../Models/Product';
+import { BaseDatabase } from '../BaseDatabase';
+import { ProductDescription } from '../../Models/ProductDescription';
 
 export class ProductData extends BaseDatabase {
 	insertProduct = async (product: Product) => {

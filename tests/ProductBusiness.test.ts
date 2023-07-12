@@ -1,4 +1,4 @@
-import { ProductBusiness } from '../src/business/ProductBusiness';
+import { ProductBusiness } from '../src/Business/Product/ProductBusiness';
 import { ProductDatabaseMock } from './mocks/productMock/ProductDatabaseMock';
 import { AuthenticatorMock } from './mocks/servicesMock/AuthenticatorMock';
 import { IdGeneratorMock } from './mocks/servicesMock/IdGeneratorMock';

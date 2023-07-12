@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { ProductBusiness } from '../business/ProductBusiness';
+import { CustomError } from '../../Models/CustomError';
+import { ProductBusiness } from '../../Business/Product/ProductBusiness';
 
 export class ProductController {
 	constructor(private productBusiness: ProductBusiness) {}
@@ -20,7 +21,11 @@ export class ProductController {
 
 			res.status(201).send('Product added to stock');
 		} catch (error: any) {
-			res.status(500).send(error.message || error.sqlMessage);
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
 		}
 	};
 
@@ -40,7 +45,11 @@ export class ProductController {
 
 			res.status(201).send('Description added');
 		} catch (error: any) {
-			res.status(500).send(error.message || error.sqlMessage);
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
 		}
 	};
 
@@ -51,7 +60,11 @@ export class ProductController {
 
 			res.send(response);
 		} catch (error: any) {
-			res.status(500).send(error.message || error.sqlMessage);
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
 		}
 	};
 
@@ -59,9 +72,13 @@ export class ProductController {
 		try {
 			const response = await this.productBusiness.getProducts();
 
-			res.send(response);
+			res.status(200).send(response);
 		} catch (error: any) {
-			res.status(500).send(error.message || error.sqlMessage);
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
 		}
 	};
 
@@ -70,23 +87,31 @@ export class ProductController {
 			const { id } = req.params;
 			const response = await this.productBusiness.getProductById(id);
 
-			res.send(response);
+			res.status(200).send(response);
 		} catch (error: any) {
-			res.status(500).send(error.message || error.sqlMessage);
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
 		}
 	};
 
 	editPrice = async (req: Request, res: Response) => {
 		try {
 			const token: string = req.headers.authorization as string;
-			const productId = req.params.productId;
+			const { productId } = req.params;
 			const { price } = req.body;
 
 			await this.productBusiness.editPrice(token, price, productId);
 
-			res.send(`The product price was updated to ${price}`);
+			res.status(200).send(`The product price was updated to ${price}`);
 		} catch (error: any) {
-			res.status(500).send(error.message || error.sqlMessage);
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
 		}
 	};
 
@@ -100,7 +125,11 @@ export class ProductController {
 
 			res.status(200).send('The product quantity was updated');
 		} catch (error: any) {
-			res.status(500).send(error.message || error.sqlMessage);
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
 		}
 	};
 
@@ -120,7 +149,11 @@ export class ProductController {
 
 			res.status(200).send('Description updated');
 		} catch (error: any) {
-			res.status(500).send(error.message || error.sqlMessage);
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
 		}
 	};
 
@@ -130,21 +163,29 @@ export class ProductController {
 			const { descriptionId } = req.params;
 			await this.productBusiness.deleteDescription(token, descriptionId);
 
-			res.status(200).send('Description successfully deleted');
+			res.status(204).send();
 		} catch (error: any) {
-			res.status(500).send(error.message || error.sqlMessage);
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
 		}
 	};
 
 	deleteProduct = async (req: Request, res: Response) => {
 		try {
 			const token: string = req.headers.authorization as string;
-			const productId = req.params.productId;
+			const { productId } = req.params;
 			await this.productBusiness.deleteProduct(token, productId);
 
-			res.status(200).send('Product successfully deleted');
+			res.status(204).send();
 		} catch (error: any) {
-			res.status(500).send(error.message || error.sqlMessage);
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
 		}
 	};
 }

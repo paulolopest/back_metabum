@@ -1,11 +1,11 @@
-import { AuthenticationData } from "../../../src/models/AuthenticationData"
+import { AuthenticationData } from '../../../src/Models/AuthenticationData';
 
 export class AuthenticatorMock {
-    generateToken = (id: AuthenticationData): string => {
-        return "mocked_token"
-    }
+	generateToken = (id: AuthenticationData): string => {
+		return 'mocked_token';
+	};
 
-    getTokenData = (token: string) => {
-        return {id: "mocked_id"}
-    }
+	getTokenData = (token: string) => {
+		return { id: 'mocked_id' };
+	};
 }
