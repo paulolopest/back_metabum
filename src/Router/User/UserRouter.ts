@@ -1,8 +1,7 @@
-import express from 'express';
-import { Router } from 'express';
+import express, { Router } from 'express';
 import { UserData } from '../../Data/User/UserData';
-import { IdGenerator } from '../../Services/IdGenerator';
 import { HashManager } from '../../Services/HashManager';
+import { IdGenerator } from '../../Services/IdGenerator';
 import { Authenticator } from '../../Services/Authenticator';
 import { UserBusiness } from '../../Business/User/UserBusiness';
 import { UserController } from '../../Controller/User/UserController';
