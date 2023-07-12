@@ -21,28 +21,14 @@ ADD
     COLUMN role ENUM("Normal", "Administrator") DEFAULT "Normal";
 
 CREATE TABLE
-    metabum_card (
-        id VARCHAR(255) PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        number VARCHAR(255) NOT NULL,
-        cvv VARCHAR(255) NOT NULL,
-        validation_date VARCHAR(255) NOT NULL,
-        user_id VARCHAR(255) NOT NULL
-    );
-
-DROP TABLE metabum_card;
-
-SELECT * FROM metabum_card;
-
-CREATE TABLE
     metabum_products (
         id VARCHAR(255) PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
+        brand VARCHAR(255) NOT NULL,
         src VARCHAR(255) NOT NULL,
         price INT NOT NULL,
         quantity INT NOT NULL,
-        tags VARCHAR(255) NOT NULL,
-        description TEXT NOT NULL
+        tags VARCHAR(255) NOT NULL
     );
 
 DROP TABLE metabum_products;
@@ -51,35 +37,16 @@ SELECT * FROM metabum_products;
 
 DESCRIBE metabum_products;
 
+CREATE TABLE
+    metabum_products_description (
+        id VARCHAR(255) PRIMARY KEY,
+        product_id VARCHAR(255) NOT NULL,
+        title VARCHAR(255) NOT NULL,
+        description TEXT NOT NULL,
+        img VARCHAR(255)
+    );
+
 DROP TABLE metabum_products;
-
-CREATE TABLE
-    metabum_creditPayment (
-        id VARCHAR(255) PRIMARY KEY,
-        user_id VARCHAR(255) NOT NULL,
-        product_id VARCHAR(255) NOT NULL,
-        card_number VARCHAR(255) NOT NULL,
-        card_name VARCHAR(255) NOT NULL,
-        card_validation DATE NOT NULL,
-        date DATE NOT NULL
-    );
-
-DROP TABLE metabum_creditPayment;
-
-SELECT * FROM metabum_creditPayment;
-
-CREATE TABLE
-    metabum_boletoPayment (
-        id VARCHAR(255) PRIMARY KEY,
-        user_id VARCHAR(255) NOT NULL,
-        product_id VARCHAR(255) NOT NULL,
-        date DATE NOT NULL,
-        bar_code VARCHAR(255) NOT NULL UNIQUE
-    );
-
-SELECT * FROM `metabum_boletoPayment`;
-
-DROP TABLE metabum_boletoPayment;
 
 CREATE TABLE
     metabum_cart (
@@ -94,3 +61,69 @@ CREATE TABLE
 SELECT * FROM metabum_cart;
 
 DROP TABLE metabum_cart;
+
+-- CREATE TABLE
+
+--     metabum_creditPayment (
+
+--         id VARCHAR(255) PRIMARY KEY,
+
+--         user_id VARCHAR(255) NOT NULL,
+
+--         product_id VARCHAR(255) NOT NULL,
+
+--         card_number VARCHAR(255) NOT NULL,
+
+--         card_name VARCHAR(255) NOT NULL,
+
+--         card_validation DATE NOT NULL,
+
+--         date DATE NOT NULL
+
+--     );
+
+-- DROP TABLE metabum_creditPayment;
+
+-- SELECT * FROM metabum_creditPayment;
+
+-- CREATE TABLE
+
+--     metabum_boletoPayment (
+
+--         id VARCHAR(255) PRIMARY KEY,
+
+--         user_id VARCHAR(255) NOT NULL,
+
+--         product_id VARCHAR(255) NOT NULL,
+
+--         date DATE NOT NULL,
+
+--         bar_code VARCHAR(255) NOT NULL UNIQUE
+
+--     );
+
+-- SELECT * FROM `metabum_boletoPayment`;
+
+-- DROP TABLE metabum_boletoPayment;
+
+-- CREATE TABLE
+
+--     metabum_card (
+
+--         id VARCHAR(255) PRIMARY KEY,
+
+--         name VARCHAR(255) NOT NULL,
+
+--         number VARCHAR(255) NOT NULL,
+
+--         cvv VARCHAR(255) NOT NULL,
+
+--         validation_date VARCHAR(255) NOT NULL,
+
+--         user_id VARCHAR(255) NOT NULL
+
+--     );
+
+-- DROP TABLE metabum_card;
+
+-- SELECT * FROM metabum_card;

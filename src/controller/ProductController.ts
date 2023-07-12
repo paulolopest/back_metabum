@@ -7,8 +7,7 @@ export class ProductController {
 	insertProduct = async (req: Request, res: Response) => {
 		try {
 			const token = req.headers.authorization as string;
-			const { name, brand, src, price, quantity, tags, description } =
-				req.body;
+			const { name, brand, src, price, quantity, tags } = req.body;
 			await this.productBusiness.insertProduct(
 				name,
 				brand,
@@ -16,7 +15,6 @@ export class ProductController {
 				price,
 				quantity,
 				tags,
-				description,
 				token
 			);
 

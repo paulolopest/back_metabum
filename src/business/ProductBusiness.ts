@@ -19,7 +19,6 @@ export class ProductBusiness {
 		price: number,
 		quantity: number,
 		tags: string,
-		description: string,
 		token: string
 	) => {
 		try {
@@ -45,8 +44,6 @@ export class ProductBusiness {
 			}
 			if (!tags) throw new Error('Enter a tags');
 
-			if (!description) throw new Error('Enter a description');
-
 			const userId = this.authenticator.getTokenData(token);
 			const identify = await this.userData.getUserById(userId.id);
 
@@ -56,16 +53,7 @@ export class ProductBusiness {
 			const id = this.idGenerator.generateId();
 
 			await this.productData.insertProduct(
-				new Product(
-					id,
-					name,
-					brand,
-					src,
-					price,
-					quantity,
-					tags,
-					description
-				)
+				new Product(id, name, brand, src, price, quantity, tags)
 			);
 		} catch (error: any) {
 			throw new Error(error.message);

@@ -12,7 +12,6 @@ export class ProductData extends BaseDatabase {
 				price: product.getPrice(),
 				quantity: product.getQuantity(),
 				tags: product.getTags(),
-				description: product.getDescription(),
 			});
 		} catch (error: any) {
 			throw new Error(error.message);
