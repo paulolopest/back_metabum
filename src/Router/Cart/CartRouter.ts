@@ -1,4 +1,4 @@
-import express, { Router } from 'express';
+import express from 'express';
 import { CartData } from '../../Data/Cart/CartData';
 import { IdGenerator } from '../../Services/IdGenerator';
 import { ProductData } from '../../Data/Product/ProductData';
@@ -6,15 +6,15 @@ import { Authenticator } from '../../Services/Authenticator';
 import { CartBusiness } from '../../Business/Cart/CartBusiness';
 import { CartController } from '../../Controller/Cart/CartController';
 
-const cartBusiness: CartBusiness = new CartBusiness(
+const cartBusiness = new CartBusiness(
 	new Authenticator(),
 	new IdGenerator(),
 	new ProductData(),
 	new CartData()
 );
-const cartController: CartController = new CartController(cartBusiness);
+const cartController = new CartController(cartBusiness);
 
-const cartRouter: Router = express.Router();
+const cartRouter = express.Router();
 
 cartRouter.post('/cart/add/:productId', cartController.addProduct);
 
