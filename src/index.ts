@@ -1,5 +1,5 @@
 import cors from 'cors';
-import express, { Express } from 'express';
+import express from 'express';
 // import { userRouter } from './Router/User/UserRouter';
 // import { cardRouter } from './Router/Card/CardRouter';
 // import { productRouter } from './Router/Product/ProductRouter';
@@ -7,7 +7,7 @@ import express, { Express } from 'express';
 import cartRouter from './router/cart/cartrouter';
 
 const port = process.env.PORT || 3000;
-const app: Express = express();
+const app = express();
 
 app.use(express.json());
 app.use(cors());
