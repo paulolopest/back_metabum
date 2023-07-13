@@ -4,7 +4,7 @@ import express, { Express } from 'express';
 // import { cardRouter } from './Router/Card/CardRouter';
 // import { productRouter } from './Router/Product/ProductRouter';
 // import { favoriteProductRouter } from './Router/Favorites/FavoriteProductRouter';
-import { cartRouter } from './router/cart/cartrouter';
+import cartRouter from './router/cart/cartrouter';
 
 const port = process.env.PORT || 3000;
 const app: Express = express();

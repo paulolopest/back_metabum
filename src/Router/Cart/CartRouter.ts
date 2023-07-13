@@ -14,7 +14,7 @@ const cartBusiness: CartBusiness = new CartBusiness(
 );
 const cartController: CartController = new CartController(cartBusiness);
 
-export const cartRouter: Router = express.Router();
+const cartRouter: Router = express.Router();
 
 cartRouter.post('/cart/add/:productId', cartController.addProduct);
 
@@ -27,3 +27,5 @@ cartRouter.put(
 
 cartRouter.delete('/cart/delete/:productId', cartController.removeProduct);
 cartRouter.delete('/cart/delete', cartController.deleteCart);
+
+export default cartRouter;
