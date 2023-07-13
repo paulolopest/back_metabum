@@ -163,7 +163,7 @@ export class ProductController {
 			const { descriptionId } = req.params;
 			await this.productBusiness.deleteDescription(token, descriptionId);
 
-			res.status(204).send();
+			res.status(204).send('Description deleted');
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				res.status(error.statusCode).send(error.message);
@@ -179,7 +179,7 @@ export class ProductController {
 			const { productId } = req.params;
 			await this.productBusiness.deleteProduct(token, productId);
 
-			res.status(204).send();
+			res.status(204).send('Product deleted');
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				res.status(error.statusCode).send(error.message);

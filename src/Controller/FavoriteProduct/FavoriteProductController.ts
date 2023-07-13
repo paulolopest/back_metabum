@@ -53,7 +53,7 @@ export class FavoriteProductController {
 
 			await this.favoriteProductBusiness.deleteProduct(token, productId);
 
-			res.status(204).send();
+			res.status(204).send('Product deleted from favorite');
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				res.status(error.statusCode).send(error.message);

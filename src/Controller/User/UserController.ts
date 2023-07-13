@@ -45,7 +45,7 @@ export class UserController {
 			const { token } = req.body;
 			await this.userBusiness.validateToken(token);
 
-			res.status(204).send();
+			res.status(204).send('Valid token');
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				res.status(error.statusCode).send(error.message);
@@ -93,7 +93,7 @@ export class UserController {
 			const token: string = req.headers.authorization as string;
 			await this.userBusiness.deleteUser(token);
 
-			res.status(204).send();
+			res.status(204).send('User deleted');
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				res.status(error.statusCode).send(error.message);
