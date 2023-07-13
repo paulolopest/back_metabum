@@ -60,6 +60,7 @@ export class UserController {
 			const token: string = req.headers.authorization as string;
 			const response = await this.userBusiness.getProfile(token);
 
+			// res.setHeader("Cache-Control", 's-maxage=10', stale-while-revalidate)
 			res.status(200).send(response);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
