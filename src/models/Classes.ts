@@ -19,47 +19,49 @@ import { FavoriteProductController } from '../Controller/FavoriteProduct/Favorit
 
 // User ---- User ---- User ---- User
 
-export const userBusiness = new UserBusiness(
+export const userBusiness: UserBusiness = new UserBusiness(
 	new Authenticator(),
 	new HashManager(),
 	new IdGenerator(),
 	new UserData()
 );
-export const userController = new UserController(userBusiness);
-export const userData = new UserData();
+export const userController: UserController = new UserController(userBusiness);
+export const userData: UserData = new UserData();
 
 // Card ---- Card ---- Card ---- Card
 
-export const cardBusiness = new CardBusiness(
+export const cardBusiness: CardBusiness = new CardBusiness(
 	new Authenticator(),
 	new HashManager(),
 	new IdGenerator(),
 	new CardData()
 );
-export const cardController = new CardController(cardBusiness);
-export const cardData = new CardData();
+export const cardController: CardController = new CardController(cardBusiness);
+export const cardData: CardData = new CardData();
 
 // Product ---- Product ---- Product ---- Product
 
-export const productBusiness = new ProductBusiness(
+export const productBusiness: ProductBusiness = new ProductBusiness(
 	new Authenticator(),
 	new IdGenerator(),
 	new ProductData(),
 	new UserData()
 );
-export const productController = new ProductController(productBusiness);
-export const productData = new ProductData();
+export const productController: ProductController = new ProductController(
+	productBusiness
+);
+export const productData: ProductData = new ProductData();
 
 // Cart ------- Cart -------- Cart ------- Cart
 
-export const cartBusiness = new CartBusiness(
+export const cartBusiness: CartBusiness = new CartBusiness(
 	new Authenticator(),
 	new IdGenerator(),
 	new ProductData(),
 	new CartData()
 );
-export const cartController = new CartController(cartBusiness);
-export const cartData = new CartData();
+export const cartController: CartController = new CartController(cartBusiness);
+export const cartData: CartData = new CartData();
 
 // FavoriteProduct -------- FavoriteProduct ---------- FavoriteProduct
 
