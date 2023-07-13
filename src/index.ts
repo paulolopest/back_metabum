@@ -1,10 +1,10 @@
 import cors from 'cors';
 import express, { Express } from 'express';
-// import { cartRouter } from './Router/Cart/CartRouter';
 // import { userRouter } from './Router/User/UserRouter';
 // import { cardRouter } from './Router/Card/CardRouter';
 // import { productRouter } from './Router/Product/ProductRouter';
 // import { favoriteProductRouter } from './Router/Favorites/FavoriteProductRouter';
+import { cartRouter } from './router/cart/cartrouter';
 
 const port = process.env.PORT || 3000;
 const app: Express = express();
@@ -21,7 +21,7 @@ const server = app.listen(port, () => {
 //Routes
 
 // app.use(userRouter);
-// app.use(cartRouter);
+app.use(cartRouter);
 // app.use(cardRouter);
 // app.use(productRouter);
 // app.use(favoriteProductRouter);
