@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express from 'express';
-import { productController } from './Models/Classes';
+import { productController } from '../src/Models/Classes';
 // import { userRouter } from './Router/User/UserRouter';
 // import { cardRouter } from './Router/Card/CardRouter';
 // import { app } from './Router/Product/ProductRouter';
