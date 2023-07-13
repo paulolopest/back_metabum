@@ -1,20 +1,5 @@
 import express, { Router } from 'express';
-import { UserData } from '../../Data/User/UserData';
-import { IdGenerator } from '../../Services/IdGenerator';
-import { ProductData } from '../../Data/Product/ProductData';
-import { Authenticator } from '../../Services/Authenticator';
-import { ProductBusiness } from '../../Business/Product/ProductBusiness';
-import { ProductController } from '../../Controller/Product/ProductController';
-
-const productBusiness: ProductBusiness = new ProductBusiness(
-	new Authenticator(),
-	new IdGenerator(),
-	new ProductData(),
-	new UserData()
-);
-const productController: ProductController = new ProductController(
-	productBusiness
-);
+import { productController } from '../../Models/Classes';
 
 export const productRouter: Router = express.Router();
 

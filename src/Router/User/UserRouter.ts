@@ -1,8 +1,5 @@
 import express, { Router } from 'express';
-import { UserController } from '../../Controller/User/UserController';
-import { userBusiness } from '../../Models/Classes';
-
-const userController: UserController = new UserController(userBusiness);
+import { userController } from '../../Models/Classes';
 
 export const userRouter: Router = express.Router();
 
