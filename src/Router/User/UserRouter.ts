@@ -17,5 +17,3 @@ userRouter.get('/profile', userController.getProfile);
 userRouter.put('/profile/edit', userController.editProfileName);
 
 userRouter.delete('/user/profile', userController.deleteUser);
-
-//a

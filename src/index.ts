@@ -25,12 +25,12 @@ app.use(cardRouter);
 app.use(productRouter);
 app.use(favoriteProductRouter);
 
-userRouter.post('/signup', userController.signup);
-userRouter.post('/login', userController.login);
-userRouter.post('/token/validate-token', userController.validateToken);
+app.post('/signup', userController.signup);
+app.post('/login', userController.login);
+app.post('/token/validate-token', userController.validateToken);
 
-userRouter.get('/profile', userController.getProfile);
+app.get('/profile', userController.getProfile);
 
-userRouter.put('/profile/edit', userController.editProfileName);
+app.put('/profile/edit', userController.editProfileName);
 
-userRouter.delete('/user/profile', userController.deleteUser);
+app.delete('/user/profile', userController.deleteUser);
