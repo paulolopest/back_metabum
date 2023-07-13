@@ -19,7 +19,7 @@ const server = app.listen(port, () => {
 	} else console.log('Error running the server');
 });
 
-app.use(userRouter);
+// app.use(userRouter);
 app.use(cartRouter);
 app.use(cardRouter);
 app.use(productRouter);
@@ -34,3 +34,5 @@ app.get('/profile', userController.getProfile);
 app.put('/profile/edit', userController.editProfileName);
 
 app.delete('/user/profile', userController.deleteUser);
+
+//a
