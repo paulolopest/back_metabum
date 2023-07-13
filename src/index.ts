@@ -1,11 +1,10 @@
 import cors from 'cors';
 import express from 'express';
-import { productController } from '../src/Models/Classes';
-// import { userRouter } from './Router/User/UserRouter';
-// import { cardRouter } from './Router/Card/CardRouter';
-// import { app } from './Router/Product/ProductRouter';
-// import { favoriteProductRouter } from './Router/Favorites/FavoriteProductRouter';
-// import cartRouter from './router/cart/cartrouter';
+import cartRouter from './Router/Cart/CartRouter';
+import { cardRouter } from './Router/Card/CardRouter';
+import { userRouter } from './Router/User/UserRouter';
+import { productRouter } from './Router/Product/ProductRouter';
+import { favoriteProductRouter } from './Router/Favorites/FavoriteProductRouter';
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -21,22 +20,8 @@ const server = app.listen(port, () => {
 
 //Routes
 
-// app.use(userRouter);
-// app.use(cartRouter);
-// app.use(cardRouter);
-// app.use(productRouter);
-// app.use(favoriteProductRouter);
-
-app.post('/insertProduct', productController.insertProduct);
-app.post('/:productId/add-description', productController.addDescription);
-
-app.get('/products', productController.getProducts);
-app.get('/:productId/description', productController.getDescriptions);
-app.get('/products/:id', productController.getProductById);
-
-app.put('/product/:productId/edit', productController.editPrice);
-app.put('/product/edit-quantity/:productId', productController.editQuantity);
-app.put('/:descriptionId/edit-description', productController.editDescription);
-
-app.delete('/product/:productId', productController.deleteProduct);
-app.delete('/:descriptionId/delete', productController.deleteDescription);
+app.use(userRouter);
+app.use(cartRouter);
+app.use(cardRouter);
+app.use(productRouter);
+app.use(favoriteProductRouter);
