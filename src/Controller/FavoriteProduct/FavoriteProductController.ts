@@ -36,6 +36,7 @@ export class FavoriteProductController {
 
 			const response = await this.favoriteProductBusiness.getProducts(token);
 
+			res.setHeader('Cache-Control', 'public, max-age=43200');
 			res.status(201).send(response);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
@@ -53,7 +54,7 @@ export class FavoriteProductController {
 
 			await this.favoriteProductBusiness.deleteProduct(token, productId);
 
-			res.status(204).send('Product deleted from favorite');
+			res.status(200).send('Product deleted from favorite');
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				res.status(error.statusCode).send(error.message);

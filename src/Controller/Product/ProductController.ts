@@ -58,7 +58,8 @@ export class ProductController {
 			const { productId } = req.params;
 			const response = await this.productBusiness.getDescriptions(productId);
 
-			res.send(response);
+			res.setHeader('Cache-Control', 'public, max-age=43200');
+			res.status(200).send(response);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				res.status(error.statusCode).send(error.message);
@@ -72,6 +73,7 @@ export class ProductController {
 		try {
 			const response = await this.productBusiness.getProducts();
 
+			res.setHeader('Cache-Control', 'public, max-age=43200');
 			res.status(200).send(response);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
@@ -87,6 +89,7 @@ export class ProductController {
 			const { id } = req.params;
 			const response = await this.productBusiness.getProductById(id);
 
+			res.setHeader('Cache-Control', 'public, max-age=43200');
 			res.status(200).send(response);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
@@ -163,7 +166,7 @@ export class ProductController {
 			const { descriptionId } = req.params;
 			await this.productBusiness.deleteDescription(token, descriptionId);
 
-			res.status(204).send('Description deleted');
+			res.status(200).send('Description deleted');
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				res.status(error.statusCode).send(error.message);
@@ -179,7 +182,7 @@ export class ProductController {
 			const { productId } = req.params;
 			await this.productBusiness.deleteProduct(token, productId);
 
-			res.status(204).send('Product deleted');
+			res.status(200).send('Product deleted');
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				res.status(error.statusCode).send(error.message);
