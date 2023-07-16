@@ -20,6 +20,8 @@ ALTER TABLE metabum_users
 ADD
     COLUMN role ENUM("Normal", "Administrator") DEFAULT "Normal";
 
+-- Products-- Products-- Products-- Products-- Products-- Products-- Products-- Products
+
 CREATE TABLE
     metabum_products (
         id VARCHAR(255) PRIMARY KEY,
@@ -46,7 +48,28 @@ CREATE TABLE
         img VARCHAR(255)
     );
 
-DROP TABLE metabum_products;
+DROP TABLE metabum_products_description;
+
+SELECT * FROM metabum_products_description;
+
+DESCRIBE metabum_products_description;
+
+CREATE table
+    metabum_product_images (
+        id VARCHAR(255) PRIMARY KEY,
+        product_id VARCHAR(255) NOT NULL,
+        small_img VARCHAR(255) NOT NULL,
+        medium_img VARCHAR(255) NOT NULL,
+        big_img VARCHAR(255) NOT NULL
+    );
+
+DROP TABLE metabum_product_images;
+
+SELECT * FROM metabum_product_images;
+
+DESCRIBE metabum_product_images;
+
+--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart
 
 CREATE TABLE
     metabum_cart (

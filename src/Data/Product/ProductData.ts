@@ -1,5 +1,5 @@
-import { Product } from '../../Models/Product';
 import { BaseDatabase } from '../BaseDatabase';
+import { Product } from '../../Models/Product';
 import { ProductDescription } from '../../Models/ProductDescription';
 
 export class ProductData extends BaseDatabase {
@@ -14,6 +14,34 @@ export class ProductData extends BaseDatabase {
 				quantity: product.getQuantity(),
 				tags: product.getTags(),
 			});
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	addImg = async (id: string, productId: string, img: string) => {
+		try {
+			await this.connection('metabum_product_images').insert({
+				id,
+				product_id: productId,
+				small_img: `${img}p.jpg`,
+				medium_img: `${img}m.jpg`,
+				big_img: `${img}gg.jpg`,
+			});
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	getProductImgs = async (productId: string) => {
+		try {
+			const response = await this.connection('metabum_product_images').where(
+				{
+					product_id: productId,
+				}
+			);
+
+			return response;
 		} catch (error: any) {
 			throw new Error(error.message);
 		}
@@ -137,6 +165,16 @@ export class ProductData extends BaseDatabase {
 			await this.connection('metabum_products')
 				.delete()
 				.where({ id: productId });
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	deleteProductImg = async (id: string) => {
+		try {
+			await this.connection('metabum_product_images').delete().where({
+				id: id,
+			});
 		} catch (error: any) {
 			throw new Error(error.message);
 		}

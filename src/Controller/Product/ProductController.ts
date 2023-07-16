@@ -53,6 +53,56 @@ export class ProductController {
 		}
 	};
 
+	addImg = async (req: Request, res: Response) => {
+		try {
+			const token: string = req.headers.authorization as string;
+			const { img } = req.body;
+			const { productId } = req.params;
+
+			await this.productBusiness.addImg(token, productId, img);
+
+			res.status(201).send('Extra img added');
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
+		}
+	};
+
+	getProductImgs = async (req: Request, res: Response) => {
+		try {
+			const { productId } = req.params;
+			const response = await this.productBusiness.getProductImgs(productId);
+
+			res.setHeader('Cache-Control', 'public, max-age=43200');
+			res.status(200).send(response);
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
+		}
+	};
+
+	deleteProductImg = async (req: Request, res: Response) => {
+		try {
+			const token: string = req.headers.authorization as string;
+			const { id } = req.params;
+			await this.productBusiness.deleteProductImg(token, id);
+
+			res.status(200).send('Image deleted');
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
+		}
+	};
+
 	getDescriptions = async (req: Request, res: Response) => {
 		try {
 			const { productId } = req.params;

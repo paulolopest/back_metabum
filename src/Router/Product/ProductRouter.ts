@@ -20,15 +20,22 @@ export const productRouter: Router = express.Router();
 
 //Routes
 
+//post -- post -- post -- post -- post --
+
 productRouter.post('/insertProduct', productController.insertProduct);
+productRouter.post('/product/:product-id/add-image', productController.addImg);
 productRouter.post(
 	'/:productId/add-description',
 	productController.addDescription
 );
 
+//get -- get -- get -- get -- get -- get --
+
 productRouter.get('/products', productController.getProducts);
 productRouter.get('/:productId/description', productController.getDescriptions);
 productRouter.get('/products/:id', productController.getProductById);
+
+//put -- put -- put -- put -- put -- put -- put --
 
 productRouter.put('/product/:productId/edit', productController.editPrice);
 productRouter.put(
@@ -39,6 +46,8 @@ productRouter.put(
 	'/:descriptionId/edit-description',
 	productController.editDescription
 );
+
+//delete -- delete -- delete -- delete -- delete -- delete -- delete --
 
 productRouter.delete('/product/:productId', productController.deleteProduct);
 productRouter.delete(

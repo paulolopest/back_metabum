@@ -104,6 +104,48 @@ export class ProductBusiness {
 		}
 	};
 
+	addImg = async (token: string, productId: string, img: string) => {
+		try {
+			if (!token) throw new CustomError(401, 'Login first');
+			if (!productId) throw new CustomError(400, 'Enter a product id');
+			if (!img) throw new CustomError(400, 'Enter a small image');
+
+			const user: AuthenticationData =
+				this.authenticator.getTokenData(token);
+			const identify = await this.userData.getUserById(user.id);
+
+			if (identify.role !== 'Administrator') {
+				throw new CustomError(401, 'Just admin can add description');
+			}
+
+			const id: string = this.idGenerator.generateId();
+
+			await this.productData.addImg(id, productId, img);
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				throw new CustomError(error.statusCode, error.message);
+			} else {
+				throw new Error(error.message);
+			}
+		}
+	};
+
+	getProductImgs = async (productId: string) => {
+		try {
+			if (!productId) throw new CustomError(400, 'Enter a product id');
+
+			const response = await this.productData.getProductImgs(productId);
+
+			return response;
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				throw new CustomError(error.statusCode, error.message);
+			} else {
+				throw new Error(error.message);
+			}
+		}
+	};
+
 	getDescriptions = async (productId: string) => {
 		try {
 			if (!productId) throw new CustomError(400, 'Enter a product id');
@@ -226,6 +268,31 @@ export class ProductBusiness {
 				description,
 				img
 			);
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				throw new CustomError(error.statusCode, error.message);
+			} else {
+				throw new Error(error.message);
+			}
+		}
+	};
+
+	deleteProductImg = async (token: string, id: string) => {
+		try {
+			if (!token) throw new CustomError(401, 'Login first');
+			if (!id) {
+				throw new CustomError(400, 'Enter a image id');
+			}
+
+			const user: AuthenticationData =
+				this.authenticator.getTokenData(token);
+			const identify = await this.userData.getUserById(user.id);
+
+			if (identify.role !== 'Administrator') {
+				throw new CustomError(401, 'Just admins can delete descriptions');
+			}
+
+			await this.productData.deleteProductImg(id);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				throw new CustomError(error.statusCode, error.message);
