@@ -22,7 +22,7 @@ export class ProductData extends BaseDatabase {
 	addImg = async (id: string, productId: string, img: string) => {
 		try {
 			await this.connection('metabum_product_images').insert({
-				id,
+				id: id,
 				product_id: productId,
 				small_img: `${img}p.jpg`,
 				medium_img: `${img}m.jpg`,
@@ -92,6 +92,18 @@ export class ProductData extends BaseDatabase {
 			});
 
 			return result[0];
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	getProductByBrand = async (brand: string) => {
+		try {
+			const result = await this.connection('metabum_products').where({
+				brand: brand,
+			});
+
+			return result;
 		} catch (error: any) {
 			throw new Error(error.message);
 		}

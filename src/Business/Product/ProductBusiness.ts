@@ -191,6 +191,21 @@ export class ProductBusiness {
 		}
 	};
 
+	getProductByBrand = async (brand: string) => {
+		try {
+			if (!brand) throw new CustomError(400, 'Enter a product brand');
+			const response = await this.productData.getProductByBrand(brand);
+
+			return response;
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				throw new CustomError(error.statusCode, error.message);
+			} else {
+				throw new Error(error.message);
+			}
+		}
+	};
+
 	editPrice = async (token: string, price: number, productId: string) => {
 		try {
 			if (!token) throw new CustomError(401, 'Login first');

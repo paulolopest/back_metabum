@@ -87,22 +87,6 @@ export class ProductController {
 		}
 	};
 
-	deleteProductImg = async (req: Request, res: Response) => {
-		try {
-			const token: string = req.headers.authorization as string;
-			const { id } = req.params;
-			await this.productBusiness.deleteProductImg(token, id);
-
-			res.status(200).send('Image deleted');
-		} catch (error: any) {
-			if (error instanceof CustomError) {
-				res.status(error.statusCode).send(error.message);
-			} else {
-				res.status(404).send(error.message);
-			}
-		}
-	};
-
 	getDescriptions = async (req: Request, res: Response) => {
 		try {
 			const { productId } = req.params;
@@ -138,6 +122,22 @@ export class ProductController {
 		try {
 			const { id } = req.params;
 			const response = await this.productBusiness.getProductById(id);
+
+			res.setHeader('Cache-Control', 'public, max-age=43200');
+			res.status(200).send(response);
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
+		}
+	};
+
+	getProductByBrand = async (req: Request, res: Response) => {
+		try {
+			const { brand } = req.params;
+			const response = await this.productBusiness.getProductByBrand(brand);
 
 			res.setHeader('Cache-Control', 'public, max-age=43200');
 			res.status(200).send(response);
@@ -201,6 +201,22 @@ export class ProductController {
 			);
 
 			res.status(200).send('Description updated');
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
+		}
+	};
+
+	deleteProductImg = async (req: Request, res: Response) => {
+		try {
+			const token: string = req.headers.authorization as string;
+			const { id } = req.params;
+			await this.productBusiness.deleteProductImg(token, id);
+
+			res.status(200).send('Image deleted');
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				res.status(error.statusCode).send(error.message);

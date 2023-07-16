@@ -18,12 +18,10 @@ const productController: ProductController = new ProductController(
 
 export const productRouter: Router = express.Router();
 
-//Routes
-
 //post -- post -- post -- post -- post --
 
 productRouter.post('/insertProduct', productController.insertProduct);
-productRouter.post('/product/:product-id/add-image', productController.addImg);
+productRouter.post('/product/:productId/add-image', productController.addImg);
 productRouter.post(
 	'/:productId/add-description',
 	productController.addDescription
@@ -34,6 +32,11 @@ productRouter.post(
 productRouter.get('/products', productController.getProducts);
 productRouter.get('/:productId/description', productController.getDescriptions);
 productRouter.get('/products/:id', productController.getProductById);
+productRouter.get('/products/:brand', productController.getProductByBrand);
+productRouter.get(
+	'/products/:productId/images',
+	productController.getProductImgs
+);
 
 //put -- put -- put -- put -- put -- put -- put --
 
@@ -54,3 +57,4 @@ productRouter.delete(
 	'/:descriptionId/delete',
 	productController.deleteDescription
 );
+productRouter.delete('/product/:id/delete', productController.deleteProductImg);
