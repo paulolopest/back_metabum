@@ -76,7 +76,7 @@ export class ProductController {
 			const { productId } = req.params;
 			const response = await this.productBusiness.getProductImgs(productId);
 
-			res.setHeader('Cache-Control', 'public, max-age=43200');
+			// res.setHeader('Cache-Control', 'public, max-age=43200');
 			res.status(200).send(response);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
@@ -92,7 +92,7 @@ export class ProductController {
 			const { productId } = req.params;
 			const response = await this.productBusiness.getDescriptions(productId);
 
-			res.setHeader('Cache-Control', 'public, max-age=43200');
+			// res.setHeader('Cache-Control', 'public, max-age=43200');
 			res.status(200).send(response);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
@@ -107,7 +107,7 @@ export class ProductController {
 		try {
 			const response = await this.productBusiness.getProducts();
 
-			res.setHeader('Cache-Control', 'public, max-age=43200');
+			// res.setHeader('Cache-Control', 'public, max-age=43200');
 			res.status(200).send(response);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
@@ -123,7 +123,7 @@ export class ProductController {
 			const { id } = req.params;
 			const response = await this.productBusiness.getProductById(id);
 
-			res.setHeader('Cache-Control', 'public, max-age=43200');
+			// res.setHeader('Cache-Control', 'public, max-age=43200');
 			res.status(200).send(response);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
@@ -139,7 +139,7 @@ export class ProductController {
 			const { brand } = req.params;
 			const response = await this.productBusiness.getProductByBrand(brand);
 
-			res.setHeader('Cache-Control', 'public, max-age=43200');
+			// res.setHeader('Cache-Control', 'public, max-age=43200');
 			res.status(200).send(response);
 		} catch (error: any) {
 			if (error instanceof CustomError) {

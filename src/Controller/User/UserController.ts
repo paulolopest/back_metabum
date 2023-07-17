@@ -60,7 +60,7 @@ export class UserController {
 			const token: string = req.headers.authorization as string;
 			const response = await this.userBusiness.getProfile(token);
 
-			res.setHeader('Cache-Control', 'private, max-age=43200');
+			// res.setHeader('Cache-Control', 'private, max-age=43200');
 			console.log(response);
 			res.status(200).send(response);
 		} catch (error: any) {

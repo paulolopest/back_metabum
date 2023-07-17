@@ -36,7 +36,7 @@ export class FavoriteProductController {
 
 			const response = await this.favoriteProductBusiness.getProducts(token);
 
-			res.setHeader('Cache-Control', 'public, max-age=43200');
+			// res.setHeader('Cache-Control', 'public, max-age=43200');
 			res.status(201).send(response);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
