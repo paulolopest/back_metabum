@@ -23,7 +23,7 @@ export const productRouter: Router = express.Router();
 productRouter.post('/add-product', productController.insertProduct);
 productRouter.post('/product/add-image/:productId', productController.addImg);
 productRouter.post(
-	'product/add-description/:productId',
+	'/product/description/add-description/:productId',
 	productController.addDescription
 );
 
