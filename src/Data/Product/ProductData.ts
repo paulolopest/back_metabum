@@ -40,7 +40,6 @@ export class ProductData extends BaseDatabase {
 					product_id: productId,
 				}
 			);
-
 			return response;
 		} catch (error: any) {
 			throw new Error(error.message);
