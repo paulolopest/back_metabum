@@ -33,6 +33,8 @@ CREATE TABLE
         tags VARCHAR(255) NOT NULL
     );
 
+SELECT * from metabum_products WHERE brand = "redragon";
+
 DROP TABLE metabum_products;
 
 SELECT * FROM metabum_products;

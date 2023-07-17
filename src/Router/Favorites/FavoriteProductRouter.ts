@@ -21,13 +21,16 @@ export const favoriteProductRouter: Router = express.Router();
 //Routes
 
 favoriteProductRouter.post(
-	'/:productId/add/favorites',
+	'/user/add/favorites/:productId',
 	favoriteProductController.addProduct
 );
 
-favoriteProductRouter.get('/favorites', favoriteProductController.getProducts);
+favoriteProductRouter.get(
+	'/user/favorites',
+	favoriteProductController.getProducts
+);
 
 favoriteProductRouter.delete(
-	'/favorites/:productId/delete',
+	'/user/favorites/delete/:productId',
 	favoriteProductController.deleteProduct
 );

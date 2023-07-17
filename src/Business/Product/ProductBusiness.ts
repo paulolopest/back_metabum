@@ -194,9 +194,9 @@ export class ProductBusiness {
 	getProductByBrand = async (brand: string) => {
 		try {
 			if (!brand) throw new CustomError(400, 'Enter a product brand');
-			const response = await this.productData.getProductByBrand(brand);
+			const result = await this.productData.getProductByBrand(brand);
 
-			return response;
+			return result;
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				throw new CustomError(error.statusCode, error.message);

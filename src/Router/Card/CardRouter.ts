@@ -18,8 +18,8 @@ export const cardRouter: Router = express.Router();
 
 //Routes
 
-cardRouter.post('/user/registerCard', cardController.createCard);
+cardRouter.post('/user/card/add-card', cardController.createCard);
 
 cardRouter.get('/user/cards', cardController.getAllCards);
 
-cardRouter.delete('/user/card/:cardId', cardController.deleteCard);
+cardRouter.delete('/user/card/delete/:cardId', cardController.deleteCard);
