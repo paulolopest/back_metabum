@@ -5,6 +5,7 @@ import { cardRouter } from './Router/Card/CardRouter';
 import { userRouter } from './Router/User/UserRouter';
 import { productRouter } from './Router/Product/ProductRouter';
 import { favoriteProductRouter } from './Router/Favorites/FavoriteProductRouter';
+import { productTechInfoRouter } from './Router/TechnicalInformation/ProductTechInfoRouter';
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -25,3 +26,4 @@ app.use(cartRouter);
 app.use(cardRouter);
 app.use(productRouter);
 app.use(favoriteProductRouter);
+app.use(productTechInfoRouter);

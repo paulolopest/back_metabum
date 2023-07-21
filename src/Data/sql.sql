@@ -71,6 +71,16 @@ SELECT * FROM metabum_product_images;
 
 DESCRIBE metabum_product_images;
 
+CREATE TABLE
+    metabum_product_technical_information (
+        id VARCHAR(255) PRIMARY KEY,
+        product_id VARCHAR(255) NOT NULL,
+        title VARCHAR(255) NOT NULL,
+        info JSON NOT NULL
+    );
+
+DESCRIBE metabum_product_technical_information;
+
 --Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart
 
 CREATE TABLE

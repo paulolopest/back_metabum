@@ -14,8 +14,11 @@ import { CartController } from '../Controller/Cart/CartController';
 import { ProductBusiness } from '../Business/Product/ProductBusiness';
 import { ProductController } from '../Controller/Product/ProductController';
 import { FavoriteProductData } from '../Data/FavoriteProduct/FavoriteProductData';
+import { ProductTechInfoData } from './../Data/ProductTechInfo/ProductTechInfoData';
 import { FavoriteProductBusiness } from '../Business/FavoriteProduct/FavoriteProductBusiness';
+import { ProductTechInfoBusiness } from '../Business/ProductTechInfo/ProductTechInfoBusiness';
 import { FavoriteProductController } from '../Controller/FavoriteProduct/FavoriteProductController';
+import { ProductTechInfoController } from './../Controller/ProductTechInfo/ProductTechInfoController';
 
 // User ---- User ---- User ---- User
 
@@ -76,3 +79,19 @@ export const favoriteProductController: FavoriteProductController =
 	new FavoriteProductController(favoriteProductBusiness);
 
 export const favoriteProductData = new FavoriteProductData();
+
+// TI ------- TI -------- TI ------- TI
+
+export const productTechInfoBusiness: ProductTechInfoBusiness =
+	new ProductTechInfoBusiness(
+		new ProductTechInfoData(),
+		new Authenticator(),
+		new UserData(),
+		new ProductData(),
+		new IdGenerator()
+	);
+export const productTechInfoController: ProductTechInfoController =
+	new ProductTechInfoController(productTechInfoBusiness);
+
+export const productTechInfoData: ProductTechInfoData =
+	new ProductTechInfoData();
