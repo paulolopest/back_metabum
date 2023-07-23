@@ -31,6 +31,7 @@ export class ProductTechInfoController {
 	getProductTI = async (req: Request, res: Response) => {
 		try {
 			const { productId } = req.params;
+
 			const response = await this.productTechInfoBusiness.getProductTI(
 				productId
 			);
@@ -50,6 +51,7 @@ export class ProductTechInfoController {
 		try {
 			const token: string = req.headers.authorization as string;
 			const { id } = req.params;
+
 			await this.productTechInfoBusiness.deleteProductTI(token, id);
 
 			res.status(200).send('Technical information deleted');
@@ -66,6 +68,7 @@ export class ProductTechInfoController {
 		try {
 			const token: string = req.headers.authorization as string;
 			const { productId } = req.params;
+
 			await this.productTechInfoBusiness.deleteAllProductTI(
 				token,
 				productId

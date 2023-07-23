@@ -21,6 +21,6 @@ productTechInfoRouter.delete(
 );
 
 productTechInfoRouter.delete(
-	'/product/technical-information/delete/:productId',
+	'/product/technical-information/delete/:id',
 	productTechInfoController.deleteProductTI
 );
