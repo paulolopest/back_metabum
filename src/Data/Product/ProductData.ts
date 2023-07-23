@@ -76,7 +76,7 @@ export class ProductData extends BaseDatabase {
 
 	getProducts = async () => {
 		try {
-			const response = await this.connection('metabum_products');
+			const response = await this.connection('metabum_products').limit(20);
 
 			return response;
 		} catch (error: any) {
