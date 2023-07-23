@@ -86,26 +86,9 @@ export class ProductData extends BaseDatabase {
 
 	getProductById = async (productId: string) => {
 		try {
-			const result = await this.connection('metabum_products')
-				.select('*')
-				.leftJoin(
-					'metabum_product_images',
-					'metabum_products.id',
-					'metabum_product_images.product_id'
-				)
-				.leftJoin(
-					'metabum_products_description',
-					'metabum_products.id',
-					'metabum_products_description.product_id'
-				)
-				.leftJoin(
-					'metabum_product_technical_information',
-					'metabum_product.id',
-					'metabum_product_technical_information.product_id'
-				)
-				.where({
-					id: productId,
-				});
+			const result = await this.connection('metabum_products').where({
+				id: productId,
+			});
 
 			return result[0];
 		} catch (error: any) {
