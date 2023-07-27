@@ -133,6 +133,21 @@ export class ProductController {
 			}
 		}
 	};
+	searchProduct = async (req: Request, res: Response) => {
+		try {
+			const { word } = req.params;
+			const response = await this.productBusiness.searchProduct(word);
+
+			// res.setHeader('Cache-Control', 'public, max-age=43200');
+			res.status(200).send(response);
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
+		}
+	};
 
 	getProductByBrand = async (req: Request, res: Response) => {
 		try {

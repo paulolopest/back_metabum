@@ -33,7 +33,7 @@ CREATE TABLE
         tags VARCHAR(255) NOT NULL
     );
 
-SELECT * from metabum_products WHERE brand = "redragon";
+SELECT * from metabum_products WHERE tags LIKE "%s20%";
 
 DROP TABLE metabum_products;
 
@@ -80,6 +80,10 @@ CREATE TABLE
     );
 
 DESCRIBE metabum_product_technical_information;
+
+ALTER TABLE metabum_products
+ADD
+    COLUMN category VARCHAR(255) NOT NULL;
 
 --Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart
 

@@ -175,6 +175,19 @@ export class ProductBusiness {
 			}
 		}
 	};
+	searchProduct = async (word: string) => {
+		try {
+			const response = await this.productData.searchProduct(word);
+
+			return response;
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				throw new CustomError(error.statusCode, error.message);
+			} else {
+				throw new Error(error.message);
+			}
+		}
+	};
 
 	getProductById = async (id: string) => {
 		try {

@@ -95,6 +95,19 @@ export class ProductData extends BaseDatabase {
 			throw new Error(error.message);
 		}
 	};
+	searchProduct = async (word: string) => {
+		try {
+			const result = await this.connection('metabum_products')
+				.where({ id: word })
+				.orWhere({ name: word })
+				.orWhere({ brand: word })
+				.orWhere('tags', 'LIKE', `%${word},%`);
+
+			return result;
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
 
 	getProductByBrand = async (brand: string) => {
 		try {
