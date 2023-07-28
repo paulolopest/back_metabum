@@ -95,13 +95,35 @@ export class ProductData extends BaseDatabase {
 			throw new Error(error.message);
 		}
 	};
-	searchProduct = async (word: string) => {
+	getFilteredCatalog = async (
+		word: string,
+		brand?: string,
+		department?: string
+	) => {
 		try {
-			const result = await this.connection('metabum_products')
-				.where({ id: word })
-				.orWhere({ name: word })
-				.orWhere({ brand: word })
-				.orWhere('tags', 'LIKE', `%${word},%`);
+			let result = await this.connection('metabum_products').where(
+				'tags',
+				'LIKE',
+				`%${word},%`
+			);
+
+			if (brand) {
+				result = await this.connection('metabum_products')
+					.where('tags', 'LIKE', `%${word},%`)
+					.andWhere({ brand: brand });
+			}
+			if (department) {
+				result = await this.connection('metabum_products')
+					.where('tags', 'LIKE', `%${word},%`)
+					.andWhere({ department: department });
+			}
+
+			if (brand && department) {
+				result = await this.connection('metabum_products')
+					.where('tags', 'LIKE', `%${word},%`)
+					.andWhere({ department: department })
+					.andWhere({ brand: brand });
+			}
 
 			return result;
 		} catch (error: any) {

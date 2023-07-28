@@ -175,9 +175,17 @@ export class ProductBusiness {
 			}
 		}
 	};
-	searchProduct = async (word: string) => {
+	getFilteredCatalog = async (
+		word: string,
+		brand?: string,
+		department?: string
+	) => {
 		try {
-			const response = await this.productData.searchProduct(word);
+			const response = await this.productData.getFilteredCatalog(
+				word,
+				brand,
+				department
+			);
 
 			return response;
 		} catch (error: any) {

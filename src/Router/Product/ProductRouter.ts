@@ -31,7 +31,10 @@ productRouter.post(
 
 productRouter.get('/products', productController.getProducts);
 productRouter.get('/product/id/:id', productController.getProductById);
-productRouter.get('/products/search/:word', productController.searchProduct);
+productRouter.get(
+	'/products/search/:word',
+	productController.getFilteredCatalog
+);
 productRouter.get('/product/brand/:brand', productController.getProductByBrand);
 productRouter.get(
 	'/product/images/:productId',

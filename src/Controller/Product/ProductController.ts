@@ -133,10 +133,16 @@ export class ProductController {
 			}
 		}
 	};
-	searchProduct = async (req: Request, res: Response) => {
+	getFilteredCatalog = async (req: Request, res: Response) => {
 		try {
 			const { word } = req.params;
-			const response = await this.productBusiness.searchProduct(word);
+			const { brand } = req.query;
+			const { department } = req.query;
+			const response = await this.productBusiness.getFilteredCatalog(
+				word,
+				brand as string,
+				department as string
+			);
 
 			// res.setHeader('Cache-Control', 'public, max-age=43200');
 			res.status(200).send(response);

@@ -27,11 +27,11 @@ export class CartBusiness {
 			const user: AuthenticationData =
 				this.authenticator.getTokenData(token);
 
-			const searchProduct = await this.cartData.getProductInCart(
+			const getFilteredCatalog = await this.cartData.getProductInCart(
 				user.id,
 				productId
 			);
-			if (!searchProduct) {
+			if (!getFilteredCatalog) {
 				await this.cartData.addProduct(
 					new Cart(
 						user.id,
@@ -46,7 +46,7 @@ export class CartBusiness {
 				await this.cartData.editProductQuantity(
 					user.id,
 					productId,
-					searchProduct.quantity + 1
+					getFilteredCatalog.quantity + 1
 				);
 			}
 		} catch (error: any) {
