@@ -1,6 +1,7 @@
 import { BaseDatabase } from '../BaseDatabase';
 import { Product } from '../../Models/Product';
 import { ProductDescription } from '../../Models/ProductDescription';
+import { Knex } from 'knex';
 
 export class ProductData extends BaseDatabase {
 	insertProduct = async (product: Product) => {
@@ -95,35 +96,25 @@ export class ProductData extends BaseDatabase {
 			throw new Error(error.message);
 		}
 	};
+
 	getFilteredCatalog = async (
 		word: string,
 		brand?: string,
-		department?: string
+		department?: string,
+		orderBy?: string,
+		limit?: number
 	) => {
 		try {
-			let result = await this.connection('metabum_products').where(
-				'tags',
-				'LIKE',
-				`%${word},%`
-			);
+			let query: Knex.QueryBuilder<any, any[]> = this.connection(
+				'metabum_products'
+			).where('tags', 'LIKE', `%${word},%`);
 
-			if (brand) {
-				result = await this.connection('metabum_products')
-					.where('tags', 'LIKE', `%${word},%`)
-					.andWhere({ brand: brand });
-			}
-			if (department) {
-				result = await this.connection('metabum_products')
-					.where('tags', 'LIKE', `%${word},%`)
-					.andWhere({ department: department });
-			}
+			if (brand) query = query.andWhere('brand', brand);
+			if (department) query = query.andWhere('department', department);
 
-			if (brand && department) {
-				result = await this.connection('metabum_products')
-					.where('tags', 'LIKE', `%${word},%`)
-					.andWhere({ department: department })
-					.andWhere({ brand: brand });
-			}
+			query.orderBy('price', orderBy).limit(limit ? limit : 20);
+
+			const result = await query;
 
 			return result;
 		} catch (error: any) {

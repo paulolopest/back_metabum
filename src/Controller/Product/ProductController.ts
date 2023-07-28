@@ -136,12 +136,14 @@ export class ProductController {
 	getFilteredCatalog = async (req: Request, res: Response) => {
 		try {
 			const { word } = req.params;
-			const { brand } = req.query;
-			const { department } = req.query;
+			const { brand, department, orderBy, limit } = req.query;
+
 			const response = await this.productBusiness.getFilteredCatalog(
 				word,
 				brand as string,
-				department as string
+				department as string,
+				orderBy as string,
+				Number(limit)
 			);
 
 			// res.setHeader('Cache-Control', 'public, max-age=43200');
