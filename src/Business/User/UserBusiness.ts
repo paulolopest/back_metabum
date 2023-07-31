@@ -160,6 +160,89 @@ export class UserBusiness {
 		}
 	};
 
+	editEmail = async (
+		token: string,
+		currentEmail: string,
+		newEmail: string
+	) => {
+		try {
+			if (!token) throw new CustomError(401, 'Login first');
+
+			if (!currentEmail)
+				throw new CustomError(400, 'Enter the current email');
+
+			if (!newEmail) throw new CustomError(400, 'Enter a new email');
+
+			const verifyEmail = await this.userData.getUserByEmail(currentEmail);
+			if (!verifyEmail)
+				throw new CustomError(409, 'Incorrect current email');
+
+			const verifyNewEmail = await this.userData.getUserByEmail(newEmail);
+			if (verifyNewEmail)
+				throw new CustomError(
+					409,
+					'The new email already exist in our system'
+				);
+
+			const userId: AuthenticationData =
+				this.authenticator.getTokenData(token);
+
+			await this.userData.editEmail(userId.id, newEmail);
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				throw new CustomError(error.statusCode, error.message);
+			} else {
+				throw new Error(error.message);
+			}
+		}
+	};
+
+	editPassword = async (
+		token: string,
+		currentPassword: string,
+		newPassword: string
+	) => {
+		try {
+			if (!token) throw new CustomError(401, 'Login first');
+
+			if (!currentPassword)
+				throw new CustomError(400, 'Enter the current password');
+
+			if (!newPassword) {
+				throw new CustomError(400, 'Enter a new password');
+			} else if (newPassword.length < 8) {
+				throw new CustomError(
+					400,
+					'The new password must be longer than 6 characters'
+				);
+			}
+
+			const userId: AuthenticationData =
+				this.authenticator.getTokenData(token);
+
+			const user = await this.userData.getUserById(userId.id);
+			if (!user) throw new CustomError(409, 'User not exist');
+
+			const verifyPassword: boolean = await this.hashManager.compareHash(
+				currentPassword,
+				user.password
+			);
+			if (!verifyPassword) throw new CustomError(401, 'Incorrect password');
+
+			const hashPassword: string = await this.hashManager.generateHash(
+				newPassword
+			);
+
+			await this.userData.editPassword(userId.id, hashPassword);
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				throw new CustomError(error.statusCode, error.message);
+			} else {
+				throw new Error(error.message);
+			}
+		}
+	};
+
 	deleteUser = async (token: string) => {
 		try {
 			if (!token) throw new CustomError(401, 'Login first');

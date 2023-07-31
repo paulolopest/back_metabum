@@ -76,6 +76,30 @@ export class UserData extends BaseDatabase {
 		}
 	};
 
+	editEmail = async (userId: string, email: string) => {
+		try {
+			const response = await this.connection('metabum_users')
+				.update({ email: email })
+				.where({ id: userId });
+
+			return response;
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
+	editPassword = async (userId: string, password: string) => {
+		try {
+			const response = await this.connection('metabum_users')
+				.update({ password: password })
+				.where({ id: userId });
+
+			return response;
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
 	deleteUser = async (userId: string) => {
 		try {
 			await this.connection('metabum_users').delete().where({ id: userId });

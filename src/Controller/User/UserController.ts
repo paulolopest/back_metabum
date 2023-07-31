@@ -89,6 +89,44 @@ export class UserController {
 		}
 	};
 
+	editPassword = async (req: Request, res: Response) => {
+		try {
+			const token: string = req.headers.authorization as string;
+			const { currentPassword, newPassword } = req.body;
+
+			await this.userBusiness.editPassword(
+				token,
+				currentPassword,
+				newPassword
+			);
+
+			res.status(200).send(`Password successfully updated`);
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
+		}
+	};
+
+	editEmail = async (req: Request, res: Response) => {
+		try {
+			const token: string = req.headers.authorization as string;
+			const { currentEmail, newEmail } = req.body;
+
+			await this.userBusiness.editEmail(token, currentEmail, newEmail);
+
+			res.status(200).send(`Email successfully updated`);
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
+		}
+	};
+
 	deleteUser = async (req: Request, res: Response) => {
 		try {
 			const token: string = req.headers.authorization as string;

@@ -25,5 +25,7 @@ userRouter.post('/token/validate-token', userController.validateToken);
 userRouter.get('/profile', userController.getProfile);
 
 userRouter.put('/profile/edit-name', userController.editProfileName);
+userRouter.put('/profile/change-password', userController.editPassword);
+userRouter.put('/profile/update-email', userController.editEmail);
 
 userRouter.delete('/user/delete/profile', userController.deleteUser);
