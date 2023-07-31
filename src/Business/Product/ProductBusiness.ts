@@ -15,6 +15,32 @@ export class ProductBusiness {
 		private userData: UserData
 	) {}
 
+	addImg = async (token: string, productId: string, img: string) => {
+		try {
+			if (!token) throw new CustomError(401, 'Login first');
+			if (!productId) throw new CustomError(400, 'Enter a product id');
+			if (!img) throw new CustomError(400, 'Enter a small image');
+
+			const user: AuthenticationData =
+				this.authenticator.getTokenData(token);
+			const identify = await this.userData.getUserById(user.id);
+
+			if (identify.role !== 'Administrator') {
+				throw new CustomError(401, 'Just admin can add description');
+			}
+
+			const id: string = this.idGenerator.generateId();
+
+			await this.productData.addImg(id, productId, img);
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				throw new CustomError(error.statusCode, error.message);
+			} else {
+				throw new Error(error.message);
+			}
+		}
+	};
+
 	insertProduct = async (
 		name: string,
 		brand: string,
@@ -56,10 +82,13 @@ export class ProductBusiness {
 				throw new CustomError(401, 'Just admin can insert products');
 			}
 			const id: string = this.idGenerator.generateId();
+			const photoId: string = this.idGenerator.generateId();
 
 			await this.productData.insertProduct(
 				new Product(id, name, brand, src, price, quantity, tags)
 			);
+
+			await this.productData.addImg(photoId, id, src);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				throw new CustomError(error.statusCode, error.message);
@@ -95,32 +124,6 @@ export class ProductBusiness {
 			await this.productData.addDescription(
 				new ProductDescription(id, productId, title, description, img)
 			);
-		} catch (error: any) {
-			if (error instanceof CustomError) {
-				throw new CustomError(error.statusCode, error.message);
-			} else {
-				throw new Error(error.message);
-			}
-		}
-	};
-
-	addImg = async (token: string, productId: string, img: string) => {
-		try {
-			if (!token) throw new CustomError(401, 'Login first');
-			if (!productId) throw new CustomError(400, 'Enter a product id');
-			if (!img) throw new CustomError(400, 'Enter a small image');
-
-			const user: AuthenticationData =
-				this.authenticator.getTokenData(token);
-			const identify = await this.userData.getUserById(user.id);
-
-			if (identify.role !== 'Administrator') {
-				throw new CustomError(401, 'Just admin can add description');
-			}
-
-			const id: string = this.idGenerator.generateId();
-
-			await this.productData.addImg(id, productId, img);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				throw new CustomError(error.statusCode, error.message);
