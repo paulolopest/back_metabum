@@ -113,6 +113,29 @@ CREATE TABLE
 
 DROP TABLE metabum_favorites;
 
+------------- ADRESS ------------ ADRESSS------------
+
+CREATE TABLE
+    metabum_user_address (
+        id VARCHAR(255) NOT NULL PRIMARY KEY,
+        user_id VARCHAR(255) NOT NULL,
+        zip_code BIGINT NOT NULL,
+        identification VARCHAR(255) NOT NULL,
+        street VARCHAR(255) NOT NULL,
+        number INT,
+        complement VARCHAR(255),
+        reference VARCHAR(255) NOT NULL,
+        neighborhood VARCHAR(255) NOT NULL,
+        city VARCHAR(255) NOT NULL,
+        uf VARCHAR(255) NOT NULL
+    );
+
+Drop TABLE metabum_user_address;
+
+SELECT * FROM metabum_user_address;
+
+---------------------------------------
+
 -- CREATE TABLE
 
 --     metabum_creditPayment (

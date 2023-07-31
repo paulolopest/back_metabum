@@ -12,9 +12,12 @@ import { UserController } from '../Controller/User/UserController';
 import { CardController } from '../Controller/Card/CardController';
 import { CartController } from '../Controller/Cart/CartController';
 import { ProductBusiness } from '../Business/Product/ProductBusiness';
+import { UserAddressData } from './../Data/UserAddress/UserAddressData';
 import { ProductController } from '../Controller/Product/ProductController';
 import { FavoriteProductData } from '../Data/FavoriteProduct/FavoriteProductData';
+import { UserAddressBusiness } from './../Business/UseAddress/UserAddressBusiness';
 import { ProductTechInfoData } from './../Data/ProductTechInfo/ProductTechInfoData';
+import { UserAddressController } from './../Controller/UserAddress/UserAddressController';
 import { FavoriteProductBusiness } from '../Business/FavoriteProduct/FavoriteProductBusiness';
 import { ProductTechInfoBusiness } from '../Business/ProductTechInfo/ProductTechInfoBusiness';
 import { FavoriteProductController } from '../Controller/FavoriteProduct/FavoriteProductController';
@@ -95,3 +98,16 @@ export const productTechInfoController: ProductTechInfoController =
 
 export const productTechInfoData: ProductTechInfoData =
 	new ProductTechInfoData();
+
+// Address ---------- Address --------- Address
+
+export const userAddressBusiness: UserAddressBusiness = new UserAddressBusiness(
+	new UserAddressData(),
+	new Authenticator(),
+	new IdGenerator()
+);
+
+export const userAddressController: UserAddressController =
+	new UserAddressController(userAddressBusiness);
+
+export const userAddressData: UserAddressData = new UserAddressData();
