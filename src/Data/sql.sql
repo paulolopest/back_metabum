@@ -18,7 +18,7 @@ ALTER TABLE metabum_users DROP COLUMN role;
 
 ALTER TABLE metabum_users
 ADD
-    COLUMN role ENUM("Normal", "Administrator") DEFAULT "Normal";
+    COLUMN default_address BIGINT DEFAULT 0;
 
 -- Products-- Products-- Products-- Products-- Products-- Products-- Products-- Products
 
@@ -124,7 +124,7 @@ CREATE TABLE
         street VARCHAR(255) NOT NULL,
         number INT,
         complement VARCHAR(255),
-        reference VARCHAR(255) NOT NULL,
+        reference VARCHAR(255),
         neighborhood VARCHAR(255) NOT NULL,
         city VARCHAR(255) NOT NULL,
         uf VARCHAR(255) NOT NULL

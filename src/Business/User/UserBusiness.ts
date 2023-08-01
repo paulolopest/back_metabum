@@ -105,6 +105,28 @@ export class UserBusiness {
 		}
 	};
 
+	addDefaultAddress = async (token: string, zipCode: string) => {
+		try {
+			if (!token) throw new CustomError(401, 'Login first');
+
+			if (!zipCode) throw new CustomError(400, 'Enter a zip code');
+
+			const { id } = this.authenticator.getTokenData(token);
+			const user = await this.userData.getUserById(id);
+
+			if (user.zipCode === zipCode)
+				throw new CustomError(409, 'This zip code already is the default');
+
+			await this.userData.addDefaultAddress(id, zipCode);
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				throw new CustomError(error.statusCode, error.message);
+			} else {
+				throw new Error(error.message);
+			}
+		}
+	};
+
 	validateToken = async (token: string) => {
 		try {
 			if (!token) throw new CustomError(401, 'Login first');

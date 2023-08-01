@@ -76,6 +76,18 @@ export class UserData extends BaseDatabase {
 		}
 	};
 
+	addDefaultAddress = async (id: string, zipCode: string) => {
+		try {
+			await this.connection('metabum_users')
+				.update({
+					default_address: zipCode,
+				})
+				.where({ id });
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
 	editEmail = async (userId: string, email: string) => {
 		try {
 			const response = await this.connection('metabum_users')

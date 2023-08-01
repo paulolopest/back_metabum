@@ -27,5 +27,9 @@ userRouter.get('/profile', userController.getProfile);
 userRouter.put('/profile/edit-name', userController.editProfileName);
 userRouter.put('/profile/change-password', userController.editPassword);
 userRouter.put('/profile/update-email', userController.editEmail);
+userRouter.put(
+	'/profile/update-address/:zipCode',
+	userController.addDefaultAddress
+);
 
 userRouter.delete('/user/delete/profile', userController.deleteUser);

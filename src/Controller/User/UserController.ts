@@ -40,6 +40,23 @@ export class UserController {
 		}
 	};
 
+	addDefaultAddress = async (req: Request, res: Response) => {
+		try {
+			const token = req.headers.authorization as string;
+			const { zipCode } = req.params;
+
+			await this.userBusiness.addDefaultAddress(token, zipCode);
+
+			res.status(200).send('Default address successfully updated');
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
+		}
+	};
+
 	validateToken = async (req: Request, res: Response) => {
 		try {
 			const { token } = req.body;
