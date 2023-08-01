@@ -163,7 +163,8 @@ export class UserBusiness {
 	editEmail = async (
 		token: string,
 		currentEmail: string,
-		newEmail: string
+		newEmail: string,
+		password: string
 	) => {
 		try {
 			if (!token) throw new CustomError(401, 'Login first');
@@ -172,6 +173,8 @@ export class UserBusiness {
 				throw new CustomError(400, 'Enter the current email');
 
 			if (!newEmail) throw new CustomError(400, 'Enter a new email');
+
+			if (!password) throw new CustomError(400, 'Enter a password');
 
 			const verifyEmail = await this.userData.getUserByEmail(currentEmail);
 			if (!verifyEmail)
@@ -184,10 +187,18 @@ export class UserBusiness {
 					'The new email already exist in our system'
 				);
 
-			const userId: AuthenticationData =
-				this.authenticator.getTokenData(token);
+			const { id } = this.authenticator.getTokenData(token);
 
-			await this.userData.editEmail(userId.id, newEmail);
+			const user = await this.userData.getUserById(id);
+
+			const verifyPassword = await this.hashManager.compareHash(
+				password,
+				user.password
+			);
+
+			if (!verifyPassword) throw new CustomError(401, 'Incorrect password');
+
+			await this.userData.editEmail(id, newEmail);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				throw new CustomError(error.statusCode, error.message);

@@ -113,9 +113,14 @@ export class UserController {
 	editEmail = async (req: Request, res: Response) => {
 		try {
 			const token: string = req.headers.authorization as string;
-			const { currentEmail, newEmail } = req.body;
+			const { currentEmail, newEmail, password } = req.body;
 
-			await this.userBusiness.editEmail(token, currentEmail, newEmail);
+			await this.userBusiness.editEmail(
+				token,
+				currentEmail,
+				newEmail,
+				password
+			);
 
 			res.status(200).send(`Email successfully updated`);
 		} catch (error: any) {
