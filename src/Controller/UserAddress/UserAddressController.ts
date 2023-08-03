@@ -1,4 +1,4 @@
-import { UserAddressBusiness } from '../../Business/UseAddress/UserAddressBusiness';
+import { UserAddressBusiness } from '../../Business/UserAddress/UserAddressBusiness';
 import { CustomError } from './../../Models/CustomError';
 import { Request, Response } from 'express';
 

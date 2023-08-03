@@ -15,7 +15,7 @@ import { ProductBusiness } from '../Business/Product/ProductBusiness';
 import { UserAddressData } from './../Data/UserAddress/UserAddressData';
 import { ProductController } from '../Controller/Product/ProductController';
 import { FavoriteProductData } from '../Data/FavoriteProduct/FavoriteProductData';
-import { UserAddressBusiness } from './../Business/UseAddress/UserAddressBusiness';
+import { UserAddressBusiness } from '../Business/UserAddress/UserAddressBusiness';
 import { ProductTechInfoData } from './../Data/ProductTechInfo/ProductTechInfoData';
 import { UserAddressController } from './../Controller/UserAddress/UserAddressController';
 import { FavoriteProductBusiness } from '../Business/FavoriteProduct/FavoriteProductBusiness';

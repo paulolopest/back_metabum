@@ -1,8 +1,8 @@
 import { CustomError } from '../../Models/CustomError';
 import { IdGenerator } from '../../Services/IdGenerator';
-import { UserAddressData } from './../../Data/UserAddress/UserAddressData';
-import { Authenticator } from './../../Services/Authenticator';
-import { Address } from './../../Models/Address';
+import { UserAddressData } from '../../Data/UserAddress/UserAddressData';
+import { Authenticator } from '../../Services/Authenticator';
+import { Address } from '../../Models/Address';
 
 export class UserAddressBusiness {
 	constructor(
@@ -54,11 +54,11 @@ export class UserAddressBusiness {
 					identification,
 					street,
 					number,
+					complement ? complement : '',
+					reference ? reference : '',
 					neighborhood,
 					city,
-					uf,
-					complement,
-					reference
+					uf
 				)
 			);
 		} catch (error: any) {

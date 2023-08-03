@@ -9,8 +9,8 @@ export class Address {
 		private neighborhood: string,
 		private city: string,
 		private uf: string,
-		private complement: string | undefined,
-		private reference: string | undefined
+		private complement?: string,
+		private reference?: string
 	) {}
 
 	getId(): string {
