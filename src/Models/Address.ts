@@ -6,11 +6,11 @@ export class Address {
 		private identification: string,
 		private street: string,
 		private number: number,
+		private complement: string | null,
+		private reference: string | null,
 		private neighborhood: string,
 		private city: string,
-		private uf: string,
-		private complement?: string,
-		private reference?: string
+		private uf: string
 	) {}
 
 	getId(): string {
@@ -31,6 +31,12 @@ export class Address {
 	getNumber(): number {
 		return this.number;
 	}
+	getComplement(): string | null {
+		return this.complement;
+	}
+	getReference(): string | null {
+		return this.reference;
+	}
 	getNeighborhood(): string {
 		return this.neighborhood;
 	}
@@ -39,11 +45,5 @@ export class Address {
 	}
 	getUf(): string {
 		return this.uf;
-	}
-	getComplement(): string | undefined {
-		return this.complement;
-	}
-	getReference(): string | undefined {
-		return this.reference;
 	}
 }

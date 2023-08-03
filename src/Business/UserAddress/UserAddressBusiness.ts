@@ -17,11 +17,11 @@ export class UserAddressBusiness {
 		identification: string,
 		street: string,
 		number: number,
+		complement: string,
+		reference: string,
 		neighborhood: string,
 		city: string,
-		uf: string,
-		complement?: string,
-		reference?: string
+		uf: string
 	) => {
 		try {
 			if (!token) throw new CustomError(401, 'Login first');
@@ -54,8 +54,8 @@ export class UserAddressBusiness {
 					identification,
 					street,
 					number,
-					complement ? complement : '',
-					reference ? reference : '',
+					complement ? complement : null,
+					reference ? reference : null,
 					neighborhood,
 					city,
 					uf
