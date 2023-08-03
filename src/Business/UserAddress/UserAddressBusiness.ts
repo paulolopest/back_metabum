@@ -41,8 +41,9 @@ export class UserAddressBusiness {
 				user.id,
 				zipCode
 			);
-			if (existZipCode)
+			if (existZipCode) {
 				throw new CustomError(401, 'Zip code already registered');
+			}
 
 			const id = this.idGenerator.generateId();
 

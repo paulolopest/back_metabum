@@ -31,5 +31,9 @@ userRouter.put(
 	'/profile/update-address/:zipCode',
 	userController.addDefaultAddress
 );
+userRouter.put(
+	'/profile/set-default-address/:zipCode',
+	userController.addDefaultAddress
+);
 
 userRouter.delete('/user/delete/profile', userController.deleteUser);
