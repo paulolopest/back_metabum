@@ -47,7 +47,7 @@ export class UserController {
 
 			await this.userBusiness.addDefaultAddress(token, zipCode);
 
-			res.status(200).send();
+			res.status(200);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				res.status(error.statusCode).send(error.message);
