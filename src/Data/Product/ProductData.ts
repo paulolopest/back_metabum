@@ -14,6 +14,9 @@ export class ProductData extends BaseDatabase {
 				price: product.getPrice(),
 				quantity: product.getQuantity(),
 				tags: product.getTags(),
+				department: product.getDepartment(),
+				small_src: product.getProductImg().replace('_gg.jpg', '_p.jpg'),
+				medium_src: product.getProductImg().replace('_gg.jpg', '_m.jpg'),
 			});
 		} catch (error: any) {
 			throw new Error(error.message);

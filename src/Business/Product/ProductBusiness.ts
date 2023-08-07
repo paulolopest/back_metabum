@@ -48,6 +48,7 @@ export class ProductBusiness {
 		price: number,
 		quantity: number,
 		tags: string,
+		department: string,
 		token: string
 	) => {
 		try {
@@ -85,7 +86,7 @@ export class ProductBusiness {
 			const photoId: string = this.idGenerator.generateId();
 
 			await this.productData.insertProduct(
-				new Product(id, name, brand, src, price, quantity, tags)
+				new Product(id, name, brand, src, price, quantity, tags, department)
 			);
 
 			await this.productData.addImg(photoId, id, src);
@@ -178,6 +179,7 @@ export class ProductBusiness {
 			}
 		}
 	};
+
 	getFilteredCatalog = async (
 		word: string,
 		brand?: string,

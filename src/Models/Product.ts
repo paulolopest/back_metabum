@@ -6,7 +6,8 @@ export class Product {
 		private src: string,
 		private price: number,
 		private quantity: number,
-		private tags: string
+		private tags: string,
+		private department: string
 	) {}
 
 	getId(): any {
@@ -29,5 +30,8 @@ export class Product {
 	}
 	getTags(): any {
 		return this.tags;
+	}
+	getDepartment(): string {
+		return this.department;
 	}
 }

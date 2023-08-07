@@ -33,6 +33,8 @@ CREATE TABLE
         tags VARCHAR(255) NOT NULL
     );
 
+ALTER TABLE metabum_products DROP COLUMN category ;
+
 SELECT * from metabum_products WHERE tags LIKE "%s20%";
 
 DROP TABLE metabum_products;
