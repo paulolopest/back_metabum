@@ -87,6 +87,22 @@ ALTER TABLE metabum_products
 ADD
     COLUMN category VARCHAR(255) NOT NULL;
 
+CREATE TABLE
+    metabum_product_evaluation (
+        id VARCHAR(255) NOT NULL PRIMARY KEY,
+        product_id VARCHAR(255) NOT NULL,
+        user_id VARCHAR(255) NOT NULL,
+        rating INT CHECK (
+            rating >= 0
+            AND rating <= 5
+        ),
+        pros VARCHAR(255) NOT NULL,
+        cons VARCHAR(255) NOT NULL,
+        description TEXT NOT NULL
+    );
+
+DROP TABLE metabum_product_evaluation;
+
 --Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart--Cart
 
 CREATE TABLE

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { CustomError } from '../../Models/CustomError';
-import { FavoriteProductBusiness } from '../../Business/FavoriteProduct/FavoriteProductBusiness';
+import { FavoriteProductBusiness } from '../../Business/Product/FavoriteProductBusiness';
 
 export class FavoriteProductController {
 	constructor(private favoriteProductBusiness: FavoriteProductBusiness) {}

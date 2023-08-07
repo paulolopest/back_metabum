@@ -2,9 +2,9 @@ import express, { Router } from 'express';
 import { IdGenerator } from '../../Services/IdGenerator';
 import { ProductData } from '../../Data/Product/ProductData';
 import { Authenticator } from '../../Services/Authenticator';
-import { FavoriteProductData } from '../../Data/FavoriteProduct/FavoriteProductData';
-import { FavoriteProductBusiness } from '../../Business/FavoriteProduct/FavoriteProductBusiness';
-import { FavoriteProductController } from '../../Controller/FavoriteProduct/FavoriteProductController';
+import { FavoriteProductData } from '../../Data/Product/FavoriteProductData';
+import { FavoriteProductBusiness } from '../../Business/Product/FavoriteProductBusiness';
+import { FavoriteProductController } from '../../Controller/Product/FavoriteProductController';
 
 const favoriteProductBusiness: FavoriteProductBusiness =
 	new FavoriteProductBusiness(

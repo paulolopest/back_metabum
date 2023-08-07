@@ -1,11 +1,11 @@
 import { UserData } from '../../Data/User/UserData';
 import { IdGenerator } from '../../Services/IdGenerator';
-import { CustomError } from './../../Models/CustomError';
+import { CustomError } from '../../Models/CustomError';
 import { Authenticator } from '../../Services/Authenticator';
 import { ProductData } from '../../Data/Product/ProductData';
-import { AuthenticationData } from './../../Models/AuthenticationData';
+import { AuthenticationData } from '../../Models/AuthenticationData';
 import { TechnicalInformation } from '../../Models/TechnicalInformation';
-import { ProductTechInfoData } from '../../Data/ProductTechInfo/ProductTechInfoData';
+import { ProductTechInfoData } from '../../Data/Product/ProductTechInfoData';
 
 export class ProductTechInfoBusiness {
 	constructor(

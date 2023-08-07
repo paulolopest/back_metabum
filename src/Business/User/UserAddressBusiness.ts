@@ -1,6 +1,6 @@
 import { CustomError } from '../../Models/CustomError';
 import { IdGenerator } from '../../Services/IdGenerator';
-import { UserAddressData } from '../../Data/UserAddress/UserAddressData';
+import { UserAddressData } from '../../Data/User/UserAddressData';
 import { Authenticator } from '../../Services/Authenticator';
 import { Address } from '../../Models/Address';
 

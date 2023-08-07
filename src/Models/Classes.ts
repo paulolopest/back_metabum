@@ -8,20 +8,23 @@ import { Authenticator } from '../Services/Authenticator';
 import { CardBusiness } from '../Business/Card/CardBusiness';
 import { CartBusiness } from '../Business/Cart/CartBusiness';
 import { UserBusiness } from '../Business/User/UserBusiness';
+import { UserAddressData } from '../Data/User/UserAddressData';
 import { UserController } from '../Controller/User/UserController';
 import { CardController } from '../Controller/Card/CardController';
 import { CartController } from '../Controller/Cart/CartController';
 import { ProductBusiness } from '../Business/Product/ProductBusiness';
-import { UserAddressData } from './../Data/UserAddress/UserAddressData';
+import { FavoriteProductData } from '../Data/Product/FavoriteProductData';
+import { ProductTechInfoData } from '../Data/Product/ProductTechInfoData';
+import { ProductEvaluationData } from '../Data/Product/ProductEvaluationData';
+import { UserAddressBusiness } from '../Business/User/UserAddressBusiness';
 import { ProductController } from '../Controller/Product/ProductController';
-import { FavoriteProductData } from '../Data/FavoriteProduct/FavoriteProductData';
-import { UserAddressBusiness } from '../Business/UserAddress/UserAddressBusiness';
-import { ProductTechInfoData } from './../Data/ProductTechInfo/ProductTechInfoData';
-import { UserAddressController } from './../Controller/UserAddress/UserAddressController';
-import { FavoriteProductBusiness } from '../Business/FavoriteProduct/FavoriteProductBusiness';
-import { ProductTechInfoBusiness } from '../Business/ProductTechInfo/ProductTechInfoBusiness';
-import { FavoriteProductController } from '../Controller/FavoriteProduct/FavoriteProductController';
-import { ProductTechInfoController } from './../Controller/ProductTechInfo/ProductTechInfoController';
+import { UserAddressController } from '../Controller/User/UserAddressController';
+import { FavoriteProductBusiness } from '../Business/Product/FavoriteProductBusiness';
+import { ProductTechInfoBusiness } from '../Business/Product/ProductTechInfoBusiness';
+import { ProductEvaluationBusiness } from '../Business/Product/ProductEvaluationBusiness';
+import { ProductEvaluationController } from '../Controller/Product/ProductEvaluationController';
+import { FavoriteProductController } from '../Controller/Product/FavoriteProductController';
+import { ProductTechInfoController } from '../Controller/Product/ProductTechInfoController';
 
 // User ---- User ---- User ---- User
 
@@ -111,3 +114,18 @@ export const userAddressController: UserAddressController =
 	new UserAddressController(userAddressBusiness);
 
 export const userAddressData: UserAddressData = new UserAddressData();
+
+// ProductEvaluation ---------- ProductEvaluation --------- ProductEvaluation
+
+export const productEvaluationBusiness: ProductEvaluationBusiness =
+	new ProductEvaluationBusiness(
+		new ProductEvaluationData(),
+		new Authenticator(),
+		new IdGenerator()
+	);
+
+export const productEvaluationController: ProductEvaluationController =
+	new ProductEvaluationController(productEvaluationBusiness);
+
+export const productEvaluationData: ProductEvaluationData =
+	new ProductEvaluationData();

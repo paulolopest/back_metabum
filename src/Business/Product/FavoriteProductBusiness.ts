@@ -4,7 +4,7 @@ import { ProductData } from '../../Data/Product/ProductData';
 import { Authenticator } from '../../Services/Authenticator';
 import { FavoriteProduct } from '../../Models/FavoriteProduct';
 import { AuthenticationData } from '../../Models/AuthenticationData';
-import { FavoriteProductData } from '../../Data/FavoriteProduct/FavoriteProductData';
+import { FavoriteProductData } from '../../Data/Product/FavoriteProductData';
 
 export class FavoriteProductBusiness {
 	constructor(

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { CustomError } from './../../Models/CustomError';
-import { ProductTechInfoBusiness } from './../../Business/ProductTechInfo/ProductTechInfoBusiness';
+import { CustomError } from '../../Models/CustomError';
+import { ProductTechInfoBusiness } from '../../Business/Product/ProductTechInfoBusiness';
 
 export class ProductTechInfoController {
 	constructor(private productTechInfoBusiness: ProductTechInfoBusiness) {}

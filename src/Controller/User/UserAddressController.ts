@@ -1,5 +1,5 @@
-import { UserAddressBusiness } from '../../Business/UserAddress/UserAddressBusiness';
-import { CustomError } from './../../Models/CustomError';
+import { UserAddressBusiness } from '../../Business/User/UserAddressBusiness';
+import { CustomError } from '../../Models/CustomError';
 import { Request, Response } from 'express';
 
 export class UserAddressController {
