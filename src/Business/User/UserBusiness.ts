@@ -198,6 +198,9 @@ export class UserBusiness {
 
 			if (!password) throw new CustomError(400, 'Enter a password');
 
+			if (newEmail === currentEmail)
+				throw new CustomError(409, 'You can not use the same email');
+
 			const verifyEmail = await this.userData.getUserByEmail(currentEmail);
 			if (!verifyEmail)
 				throw new CustomError(409, 'Incorrect current email');

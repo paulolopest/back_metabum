@@ -100,8 +100,12 @@ CREATE TABLE
         pros VARCHAR(255) NOT NULL,
         cons VARCHAR(255) NOT NULL,
         description TEXT NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     );
+
+ALTER TABLE metabum_products
+ADD
+    COLUMN useful INT NOT NULL DEFAULT 0;
 
 DROP TABLE metabum_product_evaluation;
 
