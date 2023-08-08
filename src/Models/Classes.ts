@@ -121,7 +121,8 @@ export const productEvaluationBusiness: ProductEvaluationBusiness =
 	new ProductEvaluationBusiness(
 		new ProductEvaluationData(),
 		new Authenticator(),
-		new IdGenerator()
+		new IdGenerator(),
+		new UserData()
 	);
 
 export const productEvaluationController: ProductEvaluationController =

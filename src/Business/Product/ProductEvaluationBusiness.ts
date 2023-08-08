@@ -4,12 +4,14 @@ import { IdGenerator } from '../../Services/IdGenerator';
 import { CustomError } from '../../Models/CustomError';
 import { ProductEvaluationData } from '../../Data/Product/ProductEvaluationData';
 import { ProductEvaluation } from '../../Models/ProductEvaluation';
+import { UserData } from '../../Data/User/UserData';
 
 export class ProductEvaluationBusiness {
 	constructor(
 		private productEvaluationData: ProductEvaluationData,
 		private authenticator: Authenticator,
-		private idGenerator: IdGenerator
+		private idGenerator: IdGenerator,
+		private userData: UserData
 	) {}
 
 	addEvaluation = async (
@@ -29,11 +31,13 @@ export class ProductEvaluationBusiness {
 			if (!description)
 				throw new CustomError(400, 'Enter a product description');
 
-			const user: AuthenticationData =
+			const userId: AuthenticationData =
 				this.authenticator.getTokenData(token);
 
+			const user = await this.userData.getUserById(userId.id);
+
 			const verifyRating = await this.productEvaluationData.searchUserRating(
-				user.id,
+				userId.id,
 				productId
 			);
 
@@ -46,7 +50,8 @@ export class ProductEvaluationBusiness {
 				new ProductEvaluation(
 					id,
 					productId,
-					user.id,
+					userId.id,
+					user.name,
 					rating,
 					pros,
 					cons,

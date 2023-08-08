@@ -8,6 +8,7 @@ export class ProductEvaluationData extends BaseDatabase {
 				id: pr.getId(),
 				product_id: pr.getProductId(),
 				user_id: pr.getUserId(),
+				user_name: pr.getUserName(),
 				rating: pr.getRating(),
 				pros: pr.getPros(),
 				cons: pr.getCons(),

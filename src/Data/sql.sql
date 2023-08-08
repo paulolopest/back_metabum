@@ -92,13 +92,15 @@ CREATE TABLE
         id VARCHAR(255) NOT NULL PRIMARY KEY,
         product_id VARCHAR(255) NOT NULL,
         user_id VARCHAR(255) NOT NULL,
+        user_name VARCHAR(255) NOT NULL,
         rating INT CHECK (
             rating >= 0
             AND rating <= 5
         ),
         pros VARCHAR(255) NOT NULL,
         cons VARCHAR(255) NOT NULL,
-        description TEXT NOT NULL
+        description TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
 DROP TABLE metabum_product_evaluation;
