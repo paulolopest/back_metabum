@@ -58,6 +58,24 @@ export class UserAddressController {
 		}
 	};
 
+	getUserDefaultZipCode = async (req: Request, res: Response) => {
+		try {
+			const token = req.headers.authorization as string;
+
+			const response = await this.userAddressBusiness.getUserDefaultZipCode(
+				token
+			);
+
+			res.status(200).send(response);
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				res.status(error.statusCode).send(error.message);
+			} else {
+				res.status(404).send(error.message);
+			}
+		}
+	};
+
 	deleteUserAddress = async (req: Request, res: Response) => {
 		try {
 			const token = req.headers.authorization as string;

@@ -6,6 +6,10 @@ export const userAddressRouter: Router = express.Router();
 //Routes
 
 userAddressRouter.get('/user/address/', userAddressController.getUserAddress);
+userAddressRouter.get(
+	'/user/default-address',
+	userAddressController.getUserDefaultZipCode
+);
 
 userAddressRouter.post(
 	'/user/address/add-address',

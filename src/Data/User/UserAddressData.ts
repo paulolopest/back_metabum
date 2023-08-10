@@ -50,6 +50,22 @@ export class UserAddressData extends BaseDatabase {
 		}
 	};
 
+	getUserDefaultZipCode = async (id: string, zipCode: number) => {
+		try {
+			const response = await this.connection('metabum_user_address')
+				.where({
+					zip_code: zipCode,
+				})
+				.andWhere({
+					user_id: id,
+				});
+
+			return response[0];
+		} catch (error: any) {
+			throw new Error(error.message);
+		}
+	};
+
 	getAddressById = async (id: string) => {
 		try {
 			const response = await this.connection('metabum_user_address').where({

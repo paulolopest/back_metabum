@@ -1,14 +1,16 @@
+import { Address } from '../../Models/Address';
+import { UserData } from '../../Data/User/UserData';
 import { CustomError } from '../../Models/CustomError';
 import { IdGenerator } from '../../Services/IdGenerator';
-import { UserAddressData } from '../../Data/User/UserAddressData';
 import { Authenticator } from '../../Services/Authenticator';
-import { Address } from '../../Models/Address';
+import { UserAddressData } from '../../Data/User/UserAddressData';
 
 export class UserAddressBusiness {
 	constructor(
 		private userAddressData: UserAddressData,
 		private authenticator: Authenticator,
-		private idGenerator: IdGenerator
+		private idGenerator: IdGenerator,
+		private userData: UserData
 	) {}
 
 	addAddress = async (
@@ -78,6 +80,29 @@ export class UserAddressBusiness {
 			const user = this.authenticator.getTokenData(token);
 
 			const response = await this.userAddressData.getUserAddress(user.id);
+
+			return response;
+		} catch (error: any) {
+			if (error instanceof CustomError) {
+				throw new CustomError(error.statusCode, error.message);
+			} else {
+				throw new Error(error.message);
+			}
+		}
+	};
+
+	getUserDefaultZipCode = async (token: string) => {
+		try {
+			if (!token) throw new CustomError(401, 'Login first');
+
+			const { id } = this.authenticator.getTokenData(token);
+
+			const user = await this.userData.getUserById(id);
+
+			const response = await this.userAddressData.getUserDefaultZipCode(
+				user.id,
+				user.default_address
+			);
 
 			return response;
 		} catch (error: any) {

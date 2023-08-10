@@ -107,7 +107,8 @@ export const productTechInfoData: ProductTechInfoData =
 export const userAddressBusiness: UserAddressBusiness = new UserAddressBusiness(
 	new UserAddressData(),
 	new Authenticator(),
-	new IdGenerator()
+	new IdGenerator(),
+	new UserData()
 );
 
 export const userAddressController: UserAddressController =
