@@ -39,7 +39,8 @@ export class CartBusiness {
 						product.src,
 						product.name,
 						product.price,
-						1
+						1,
+						product.brand
 					)
 				);
 			} else {

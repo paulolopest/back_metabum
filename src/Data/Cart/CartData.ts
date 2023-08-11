@@ -10,6 +10,7 @@ export class CartData extends BaseDatabase {
 			product_name: cart.getProductName(),
 			product_price: cart.getProductPrice(),
 			quantity: cart.getQuantity(),
+			product_brand: cart.getProductBrand(),
 		});
 	};
 

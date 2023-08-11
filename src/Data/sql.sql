@@ -125,6 +125,12 @@ SELECT * FROM metabum_cart;
 
 DROP TABLE metabum_cart;
 
+ALTER TABLE metabum_cart
+ADD
+    COLUMN product_brand VARCHAR(255) NOT NULL;
+
+------------- Favorites------------ Favorites------------
+
 CREATE TABLE
     metabum_favorites (
         user_id VARCHAR(255) NOT NULL,

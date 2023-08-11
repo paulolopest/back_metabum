@@ -5,7 +5,8 @@ export class Cart {
 		private productSrc: string,
 		private productName: string,
 		private productPrice: string,
-		private quantity: number
+		private quantity: number,
+		private productBrand: string
 	) {}
 
 	public getUserId(): string {
@@ -25,5 +26,8 @@ export class Cart {
 	}
 	public getQuantity(): number {
 		return this.quantity;
+	}
+	public getProductBrand(): string {
+		return this.productBrand;
 	}
 }
