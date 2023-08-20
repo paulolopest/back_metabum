@@ -1,7 +1,7 @@
+import { Knex } from 'knex';
 import { BaseDatabase } from '../BaseDatabase';
 import { Product } from '../../Models/Product';
 import { ProductDescription } from '../../Models/ProductDescription';
-import { Knex } from 'knex';
 
 export class ProductData extends BaseDatabase {
 	insertProduct = async (product: Product) => {

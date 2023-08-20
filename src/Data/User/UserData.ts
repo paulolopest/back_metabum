@@ -54,9 +54,11 @@ export class UserData extends BaseDatabase {
 
 	getProfile = async (id: string) => {
 		try {
-			const response = await this.connection('metabum_users').where({
-				id: id,
-			});
+			const response = await this.connection('metabum_users')
+				.where({
+					id: id,
+				})
+				.select('id', 'name', 'email', 'default_address');
 
 			return response[0];
 		} catch (error: any) {
