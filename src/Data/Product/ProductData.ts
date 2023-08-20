@@ -78,9 +78,11 @@ export class ProductData extends BaseDatabase {
 		}
 	};
 
-	getProducts = async () => {
+	getProducts = async (orderBy: string, limit: number) => {
 		try {
-			const response = await this.connection('metabum_products').limit(20);
+			const response = await this.connection('metabum_products')
+				.limit(limit ? limit : 20)
+				.orderBy('created_at', orderBy);
 
 			return response;
 		} catch (error: any) {

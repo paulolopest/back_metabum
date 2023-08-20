@@ -33,6 +33,10 @@ CREATE TABLE
         tags VARCHAR(255) NOT NULL
     );
 
+ALTER TABLE metabum_products
+ADD
+    COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
 ALTER TABLE metabum_products DROP COLUMN category ;
 
 SELECT * from metabum_products WHERE tags LIKE "%s20%";

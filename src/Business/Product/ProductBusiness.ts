@@ -166,9 +166,12 @@ export class ProductBusiness {
 		}
 	};
 
-	getProducts = async () => {
+	getProducts = async (orderBy?: string, limit?: number) => {
 		try {
-			const response = await this.productData.getProducts();
+			const response = await this.productData.getProducts(
+				orderBy as string,
+				limit as number
+			);
 
 			return response;
 		} catch (error: any) {

@@ -107,7 +107,11 @@ export class ProductController {
 
 	getProducts = async (req: Request, res: Response) => {
 		try {
-			const response = await this.productBusiness.getProducts();
+			const { orderBy, limit } = req.query;
+			const response = await this.productBusiness.getProducts(
+				orderBy as string,
+				Number(limit)
+			);
 
 			// res.setHeader('Cache-Control', 'public, max-age=43200');
 			res.status(200).send(response);
