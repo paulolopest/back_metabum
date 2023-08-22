@@ -185,6 +185,7 @@ export class ProductBusiness {
 
 	getFilteredCatalog = async (
 		word: string,
+		name?: string,
 		brand?: string,
 		department?: string,
 		orderBy?: string,
@@ -193,6 +194,7 @@ export class ProductBusiness {
 		try {
 			const response = await this.productData.getFilteredCatalog(
 				word,
+				name,
 				brand,
 				department,
 				orderBy,

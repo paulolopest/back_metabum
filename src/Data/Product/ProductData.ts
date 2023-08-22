@@ -104,6 +104,7 @@ export class ProductData extends BaseDatabase {
 
 	getFilteredCatalog = async (
 		word: string,
+		name?: string,
 		brand?: string,
 		department?: string,
 		orderBy?: string,
@@ -116,6 +117,7 @@ export class ProductData extends BaseDatabase {
 
 			if (brand) query = query.andWhere('brand', brand);
 			if (department) query = query.andWhere('department', department);
+			if (name) query = query.andWhere('name', 'like', `%${name}%`);
 
 			query.orderBy('price', orderBy).limit(limit ? limit : 20);
 
