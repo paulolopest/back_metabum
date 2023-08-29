@@ -29,6 +29,7 @@ export class UserBusiness {
 			if (user) throw new CustomError(409, 'User already exist');
 
 			if (!cpf) throw new CustomError(400, 'Enter a CPF');
+			cpf.replace('-', '').replace('.', '');
 			if (cpf.length !== 11) {
 				throw new CustomError(400, 'The CPF must be equal 11 characters');
 			}

@@ -9,7 +9,7 @@ export class UserData extends BaseDatabase {
 				name: user.getName(),
 				email: user.getEmail(),
 				password: user.getPassword(),
-				cpf: user.getCpf().replace('-', '').replace('.', ''),
+				cpf: user.getCpf(),
 			});
 		} catch (error: any) {
 			throw new Error(error.message);
