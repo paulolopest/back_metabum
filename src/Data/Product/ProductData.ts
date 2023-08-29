@@ -28,9 +28,9 @@ export class ProductData extends BaseDatabase {
 			await this.connection('metabum_product_images').insert({
 				id: id,
 				product_id: productId,
-				small_img: `${img}p.jpg`,
-				medium_img: `${img}m.jpg`,
-				big_img: `${img}gg.jpg`,
+				small_img: img.replace('_gg.jpg', '_p.jpg'),
+				medium_img: img.replace('_gg.jpg', '_m.jpg'),
+				big_img: img,
 			});
 		} catch (error: any) {
 			throw new Error(error.message);
