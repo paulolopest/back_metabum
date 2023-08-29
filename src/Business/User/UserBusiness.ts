@@ -32,7 +32,8 @@ export class UserBusiness {
 
 			if (!cpf) throw new CustomError(400, 'Enter a CPF');
 
-			cpf.replace('-', '').replace('.', '');
+			cpf.replace('-', '');
+			cpf.replace('.', '');
 
 			if (cpf.length !== 11) {
 				throw new CustomError(400, 'The CPF must be equal 11 characters');
