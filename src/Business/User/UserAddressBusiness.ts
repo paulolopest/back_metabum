@@ -37,8 +37,6 @@ export class UserAddressBusiness {
 			if (!city) throw new CustomError(400, 'Enter a city');
 			if (!uf) throw new CustomError(400, 'Enter a uf');
 
-			zipCode.toString().replace('-', '');
-
 			const user = this.authenticator.getTokenData(token);
 
 			const existZipCode = await this.userAddressData.getAddressByZipCode(
@@ -55,7 +53,7 @@ export class UserAddressBusiness {
 				new Address(
 					id,
 					user.id,
-					Number(zipCode),
+					zipCode,
 					identification,
 					street,
 					number,
