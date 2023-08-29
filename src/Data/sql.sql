@@ -235,3 +235,26 @@ SELECT * FROM metabum_user_address;
 -- DROP TABLE metabum_card;
 
 -- SELECT * FROM metabum_card;
+
+INSERT INTO
+    metabum_product_technical_information(id, title, product_id, info)
+VALUES (
+        UUID(),
+        'Características',
+        '161b09b8-8991-4d79-bd1b-4cb746eeab18',
+        '{"Marca": "Sony", "Modelo": "CFI-ZWH1R01"}'
+    ), (
+        UUID(),
+        'Operacional',
+        '161b09b8-8991-4d79-bd1b-4cb746eeab18',
+        '{
+          "Potência de entrada": "Headset sem fio: 5V = 6500 mA / Adaptador sem fio USB: 5V = 100 mA",
+          "Tipo de Bateria": "Bateria de íon-lítio recarregável integrada",
+          "Voltagem de Bateria": "3.65 V",
+          "Capacidade de Bateria": "1000 mAh",
+          "Temperatura de operação": "5º C a 35º C",
+          "Sistema de comunicação": "Radiofrequência de 2,4 1.6GHz",
+          "Alcance máximo de comunicação": "Aprox. 10m",
+          "Tempo de utilização quando totalmente carregado": "Até 12 horas de jogo em volume médio"
+      }'
+    );
