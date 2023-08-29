@@ -17,10 +17,12 @@ export class UserBusiness {
 	signup = async (
 		name: string,
 		email: string,
-		cpf: string,
+		cpfController: string,
 		password: string
 	) => {
 		try {
+			let cpf = cpfController;
+
 			if (!name) throw new CustomError(400, 'Enter a name');
 
 			if (!email) throw new CustomError(400, 'Enter an email');
@@ -29,7 +31,9 @@ export class UserBusiness {
 			if (user) throw new CustomError(409, 'User already exist');
 
 			if (!cpf) throw new CustomError(400, 'Enter a CPF');
+
 			cpf.replace('-', '').replace('.', '');
+
 			if (cpf.length !== 11) {
 				throw new CustomError(400, 'The CPF must be equal 11 characters');
 			}
