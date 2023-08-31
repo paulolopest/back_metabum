@@ -20,17 +20,8 @@ export const favoriteProductRouter: Router = express.Router();
 
 //Routes
 
-favoriteProductRouter.post(
-	'/user/add/favorites/:productId',
-	favoriteProductController.addProduct
-);
+favoriteProductRouter.post('/user/add/favorites/:productId',favoriteProductController.addProduct);
 
-favoriteProductRouter.get(
-	'/user/favorites',
-	favoriteProductController.getProducts
-);
+favoriteProductRouter.get('/user/favorites',favoriteProductController.getProducts);
 
-favoriteProductRouter.delete(
-	'/user/favorites/delete/:productId',
-	favoriteProductController.deleteProduct
-);
+favoriteProductRouter.delete('/user/favorites/delete/:productId',favoriteProductController.deleteProduct);

@@ -5,22 +5,10 @@ export const productTechInfoRouter: Router = express.Router();
 
 //
 
-productTechInfoRouter.post(
-	'/product/technical-information/add/:productId',
-	productTechInfoController.addTI
-);
+productTechInfoRouter.post('/product/technical-information/add/:productId',productTechInfoController.addTI);
 
-productTechInfoRouter.get(
-	'/product/technical-information/:productId',
-	productTechInfoController.getProductTI
-);
+productTechInfoRouter.get('/product/technical-information/:productId',productTechInfoController.getProductTI);
 
-productTechInfoRouter.delete(
-	'/product/technical-information/delete/all/:productId',
-	productTechInfoController.deleteAllProductTI
-);
+productTechInfoRouter.delete('/product/technical-information/delete/all/:productId',productTechInfoController.deleteAllProductTI);
 
-productTechInfoRouter.delete(
-	'/product/technical-information/delete/:id',
-	productTechInfoController.deleteProductTI
-);
+productTechInfoRouter.delete('/product/technical-information/delete/:id',productTechInfoController.deleteProductTI);

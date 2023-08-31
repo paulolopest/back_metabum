@@ -5,17 +5,8 @@ export const productEvaluationRouter: Router = express.Router();
 
 //Routes
 
-productEvaluationRouter.post(
-	'/product/add-evaluation/:productId',
-	productEvaluationController.addEvaluation
-);
+productEvaluationRouter.post('/product/add-evaluation/:productId',productEvaluationController.addEvaluation);
 
-productEvaluationRouter.get(
-	'/product/evaluation/:productId',
-	productEvaluationController.getEvaluation
-);
+productEvaluationRouter.get('/product/evaluation/:productId',productEvaluationController.getEvaluation);
 
-productEvaluationRouter.delete(
-	'/product/evaluation/delete/:productId',
-	productEvaluationController.deleteEvaluation
-);
+productEvaluationRouter.delete('/product/evaluation/delete/:productId',productEvaluationController.deleteEvaluation);

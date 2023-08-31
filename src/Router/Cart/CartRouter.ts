@@ -20,10 +20,7 @@ cartRouter.post('/cart/add/:productId', cartController.addProduct);
 
 cartRouter.get('/cart/user', cartController.getUserCart);
 
-cartRouter.put(
-	'/cart/edit-quantity/:productId',
-	cartController.editProductQuantity
-);
+cartRouter.put('/cart/edit-quantity/:productId',cartController.editProductQuantity);
 
 cartRouter.delete('/cart/delete/:productId', cartController.removeProduct);
 cartRouter.delete('/cart/delete', cartController.deleteCart);

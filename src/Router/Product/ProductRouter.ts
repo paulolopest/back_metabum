@@ -22,55 +22,25 @@ export const productRouter: Router = express.Router();
 
 productRouter.post('/add-product', productController.insertProduct);
 productRouter.post('/product/add-image/:productId', productController.addImg);
-productRouter.post(
-	'/product/description/add-description/:productId',
-	productController.addDescription
-);
+productRouter.post('/product/description/add-description/:productId',productController.addDescription);
 
 //get -- get -- get -- get -- get -- get --
 
 productRouter.get('/products', productController.getProducts);
 productRouter.get('/product/id/:id', productController.getProductById);
-productRouter.get(
-	'/products/search/:word',
-	productController.getFilteredCatalog
-);
+productRouter.get('/products/search/:word',productController.getFilteredCatalog);
 productRouter.get('/product/brand/:brand', productController.getProductByBrand);
-productRouter.get(
-	'/product/images/:productId',
-	productController.getProductImgs
-);
-productRouter.get(
-	'/product/description/:productId',
-	productController.getDescriptions
-);
+productRouter.get('/product/images/:productId',productController.getProductImgs);
+productRouter.get('/product/description/:productId',productController.getDescriptions);
 
 //put -- put -- put -- put -- put -- put -- put --
 
-productRouter.put(
-	'/product/edit-price/:productId',
-	productController.editPrice
-);
-productRouter.put(
-	'/product/edit-quantity/:productId',
-	productController.editQuantity
-);
-productRouter.put(
-	'/product/edit-description/:descriptionId',
-	productController.editDescription
-);
+productRouter.put('/product/edit-price/:productId',productController.editPrice);
+productRouter.put('/product/edit-quantity/:productId',productController.editQuantity);
+productRouter.put('/product/edit-description/:descriptionId',productController.editDescription);
 
 //delete -- delete -- delete -- delete -- delete -- delete -- delete --
 
-productRouter.delete(
-	'/product/delete/:productId',
-	productController.deleteProduct
-);
-productRouter.delete(
-	'/product/description/delete/:descriptionId',
-	productController.deleteDescription
-);
-productRouter.delete(
-	'/product/img/delete/:id',
-	productController.deleteProductImg
-);
+productRouter.delete('/product/delete/:productId',productController.deleteProduct);
+productRouter.delete('/product/description/delete/:descriptionId',productController.deleteDescription);
+productRouter.delete('/product/img/delete/:id',productController.deleteProductImg);
