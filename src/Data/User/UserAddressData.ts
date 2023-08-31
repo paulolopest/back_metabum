@@ -17,6 +17,12 @@ export class UserAddressData extends BaseDatabase {
 				city: ads.getCity(),
 				uf: ads.getUf(),
 			});
+
+			await this.connection('metabum_users')
+				.update({
+					default_address: ads.getZipCode(),
+				})
+				.where({ id: ads.getUserId() });
 		} catch (error: any) {
 			throw new Error(error.message);
 		}
