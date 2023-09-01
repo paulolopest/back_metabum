@@ -1,7 +1,6 @@
 import cors from 'cors';
 import express from 'express';
 import cartRouter from './Router/Cart/CartRouter';
-import { cardRouter } from './Router/Card/CardRouter';
 import { userRouter } from './Router/User/UserRouter';
 import { productRouter } from './Router/Product/ProductRouter';
 import { userAddressRouter } from './Router/UserAddress/UserAddressRouter';
@@ -25,7 +24,6 @@ const server = app.listen(port, () => {
 
 app.use(userRouter);
 app.use(cartRouter);
-app.use(cardRouter);
 app.use(productRouter);
 app.use(userAddressRouter);
 app.use(favoriteProductRouter);

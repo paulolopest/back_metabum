@@ -11,7 +11,7 @@ export class UserController {
 			const response = await this.userBusiness.signup(
 				name,
 				email,
-				cpf,
+				cpf.replaceAll('.', '').replaceAll('-', ''),
 				password
 			);
 
@@ -45,14 +45,14 @@ export class UserController {
 			const token = req.headers.authorization as string;
 			const { zipCode } = req.params;
 
-			await this.userBusiness.addDefaultAddress(token, zipCode);
+			await this.userBusiness.addDefaultAddress(token, zipCode as string);
 
 			res.status(200).send('Default address updated');
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				res.status(error.statusCode).send(error.message);
 			} else {
-				res.status(404).send(error.message);
+				res.status(404).send(error.sqlMessage || error.message);
 			}
 		}
 	};

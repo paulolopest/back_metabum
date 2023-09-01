@@ -19,9 +19,10 @@ export class UserAddressController {
 				city,
 				uf,
 			} = req.body;
+
 			await this.userAddressBusiness.addAddress(
 				token,
-				zipCode,
+				zipCode.replaceAll('.', '').replaceAll('-', ''),
 				identification,
 				street,
 				number,

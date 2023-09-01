@@ -4,7 +4,7 @@ import { BaseDatabase } from '../BaseDatabase';
 export class UserAddressData extends BaseDatabase {
 	addAddress = async (ads: Address) => {
 		try {
-			await this.connection('metabum_user_address').insert({
+			const query = await this.connection('metabum_user_address').insert({
 				id: ads.getId(),
 				user_id: ads.getUserId(),
 				zip_code: ads.getZipCode(),
@@ -18,7 +18,7 @@ export class UserAddressData extends BaseDatabase {
 				uf: ads.getUf(),
 			});
 
-			await this.connection('metabum_users')
+			const query2 = await this.connection('metabum_users')
 				.update({
 					default_address: ads.getZipCode(),
 				})

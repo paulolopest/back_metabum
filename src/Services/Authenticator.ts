@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import * as jwt from 'jsonwebtoken';
 import { AuthenticationData } from '../Models/AuthenticationData';
+import { CustomError } from '../Models/CustomError';
 
 dotenv.config();
 
@@ -12,9 +13,19 @@ export class Authenticator {
 	};
 
 	getTokenData = (token: string): AuthenticationData => {
-		return jwt.verify(
-			token,
-			process.env.SECRET_KEY as jwt.Secret
-		) as AuthenticationData;
+		try {
+			return jwt.verify(
+				token,
+				process.env.SECRET_KEY as jwt.Secret
+			) as AuthenticationData;
+		} catch (error: any) {
+			if (error.name === 'TokenExpiredError') {
+				throw new CustomError(409, 'Expired token, login again');
+			} else if (error.name === 'JsonWebTokenError') {
+				throw new CustomError(409, 'Invalid token, login again');
+			} else {
+				throw new CustomError(404, 'Unknown validation error, login again');
+			}
+		}
 	};
 }
