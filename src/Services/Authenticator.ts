@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import * as jwt from 'jsonwebtoken';
-import { AuthenticationData } from '../Models/AuthenticationData';
 import { CustomError } from '../Models/CustomError';
+import { AuthenticationData } from '../Models/AuthenticationData';
 
 dotenv.config();
 

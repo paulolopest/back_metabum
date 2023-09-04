@@ -237,24 +237,69 @@ SELECT * FROM metabum_user_address;
 -- SELECT * FROM metabum_card;
 
 INSERT INTO
-    metabum_product_technical_information(id, title, product_id, info)
+    metabum_product_technical_information (id, title, product_id, info)
 VALUES (
         UUID(),
         'Características',
-        '161b09b8-8991-4d79-bd1b-4cb746eeab18',
-        '{"Marca": "Sony", "Modelo": "CFI-ZWH1R01"}'
+        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
+        '{
+        "Marca": "AMD",
+        "Modelo": "100-100000065BOX"
+    }'
     ), (
         UUID(),
-        'Operacional',
-        '161b09b8-8991-4d79-bd1b-4cb746eeab18',
+        'CPU',
+        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
         '{
-          "Potência de entrada": "Headset sem fio: 5V = 6500 mA / Adaptador sem fio USB: 5V = 100 mA",
-          "Tipo de Bateria": "Bateria de íon-lítio recarregável integrada",
-          "Voltagem de Bateria": "3.65 V",
-          "Capacidade de Bateria": "1000 mAh",
-          "Temperatura de operação": "5º C a 35º C",
-          "Sistema de comunicação": "Radiofrequência de 2,4 1.6GHz",
-          "Alcance máximo de comunicação": "Aprox. 10m",
-          "Tempo de utilização quando totalmente carregado": "Até 12 horas de jogo em volume médio"
-      }'
+        "Núcleos de CPU": 6,
+        "Threads": 12,
+        "Clock básico": "3.7GHz",
+        "Clock de Max Boost": "Até 4.6GHz",
+        "Cachê L2 total": "3MB",
+        "Cachê L3 total": "32MB",
+        "Desbloqueado": "Sim",
+        "CMOS": "TSMC 7nm FinFET",
+        "Soquete": "AM4",
+        "Versão do PCI Express": "PCIe 4.0",
+        "Solução térmica (PIB)": "Wraith Stealth",
+        "TDP / TDP Padrão": "65W"
+    }'
+    ), (
+        UUID(),
+        'Memória',
+        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
+        '{
+        "Velocidade máxima": "3200MHz",
+        "Tipo": "DDR4"
+    }'
+    ), (
+        UUID(),
+        'Tecnologias compatíveis',
+        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
+        '{
+        "Tecnologia AMD StoreMI": "Sim",
+        "Utilitário AMD Ryzen Master": "Sim",
+        "AMD Ryzen VR-Ready Premium": "Sim"
+    }'
+    ), (
+        UUID(),
+        'Conteúdo da Embalagem',
+        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
+        '{
+        "Itens Inclusos": "Processador AMD, Refrigeração Wraith Stealth (Cooler)"
+    }'
+    ), (
+        UUID(),
+        'Garantia',
+        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
+        '{
+        "Garantia": "12 meses de garantia"
+    }'
+    ), (
+        UUID(),
+        'Peso',
+        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
+        '{
+        "Peso": "400 gramas (bruto com embalagem)"
+    }'
     );

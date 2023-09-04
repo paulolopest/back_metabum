@@ -110,10 +110,15 @@ export class CartBusiness {
 			if (!token) throw new CustomError(401, 'Login first');
 			if (!productId) throw new CustomError(400, 'Enter a product id');
 
-			const user: AuthenticationData =
+			const { id }: AuthenticationData =
 				this.authenticator.getTokenData(token);
 
-			await this.cartData.removeProduct(user.id, productId);
+			const product = await this.productData.getProductById(productId);
+
+			if (id !== product.user_id)
+				throw new CustomError(409, 'Access denied');
+
+			await this.cartData.removeProduct(id, productId);
 		} catch (error: any) {
 			if (error instanceof CustomError) {
 				throw new CustomError(error.statusCode, error.message);
