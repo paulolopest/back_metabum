@@ -241,65 +241,134 @@ INSERT INTO
 VALUES (
         UUID(),
         'Características',
-        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
+        '9c3653da-21b2-4776-9dbf-1bd670abd2fe',
         '{
-        "Marca": "AMD",
-        "Modelo": "100-100000065BOX"
+        "Marca": "Gigabyte",
+        "Modelo": "B450M DS3H V2"
     }'
     ), (
         UUID(),
         'CPU',
-        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
+        '9c3653da-21b2-4776-9dbf-1bd670abd2fe',
         '{
-        "Núcleos de CPU": 6,
-        "Threads": 12,
-        "Clock básico": "3.7GHz",
-        "Clock de Max Boost": "Até 4.6GHz",
-        "Cachê L2 total": "3MB",
-        "Cachê L3 total": "32MB",
-        "Desbloqueado": "Sim",
-        "CMOS": "TSMC 7nm FinFET",
-        "Soquete": "AM4",
-        "Versão do PCI Express": "PCIe 4.0",
-        "Solução térmica (PIB)": "Wraith Stealth",
-        "TDP / TDP Padrão": "65W"
+        "Soquete AM4": "Suporta AMD Ryzen 5000G Séries / Ryzen de 2ª Geração / Ryzen de 1ª Geração / Ryzen de 2ª Geração com Gráficos Radeon Vega / Ryzen de 1ª Geração com Gráficos Radeon Vega / Athlon com Processadores Gráficos Radeon Vega"
+    }'
+    ), (
+        UUID(),
+        'Chipset',
+        '9c3653da-21b2-4776-9dbf-1bd670abd2fe',
+        '{
+        "AMD B450": ""
     }'
     ), (
         UUID(),
         'Memória',
-        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
+        '9c3653da-21b2-4776-9dbf-1bd670abd2fe',
         '{
-        "Velocidade máxima": "3200MHz",
-        "Tipo": "DDR4"
+        "4 x soquetes DDR4 DIMM com suporte para até 64 GB de memória do sistema": "",
+        "Arquitetura de memória dual channel": "",
+        "Suporte para módulos de memória DDR4 3600 (OC) / 3466 (OC) / 3200 (OC) / 2933/2667/2400/2133 MHz": "",
+        "Suporte para módulos de memória DIMM 1Rx8 / 2Rx8 sem buffer ECC (operar em modo não ECC)": "",
+        "Suporte para módulos de memória DIMM 1Rx8 / 2Rx8 / 1Rx16 não-ECC e sem buffer": "",
+        "Suporte para módulos de memória Extreme Memory Profile (XMP)": ""
     }'
     ), (
         UUID(),
-        'Tecnologias compatíveis',
-        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
+        'Processador gráfico integrado',
+        '9c3653da-21b2-4776-9dbf-1bd670abd2fe',
         '{
-        "Tecnologia AMD StoreMI": "Sim",
-        "Utilitário AMD Ryzen Master": "Sim",
-        "AMD Ryzen VR-Ready Premium": "Sim"
+        "1 porta DVI-D, suportando uma resolução máxima de 1920x1200 @ 60 Hz": "",
+        "1 porta HDMI, suportando uma resolução máxima de 4096x2160 @ 60 Hz": "",
+        "Memória compartilhada máxima de 16 GB": ""
     }'
     ), (
         UUID(),
-        'Conteúdo da Embalagem',
-        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
+        'Áudio',
+        '9c3653da-21b2-4776-9dbf-1bd670abd2fe',
         '{
-        "Itens Inclusos": "Processador AMD, Refrigeração Wraith Stealth (Cooler)"
+        "Codec Realtek ALC887": "",
+        "Áudio de alta definição": "",
+        "2/4 / 5.1 / 7.1 canais": "",
+        "Suporte para S / PDIF Out": ""
     }'
     ), (
         UUID(),
-        'Garantia',
-        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
+        'LAN',
+        '9c3653da-21b2-4776-9dbf-1bd670abd2fe',
         '{
-        "Garantia": "12 meses de garantia"
+        "Chip Realtek GbE LAN (10/100/1000 Mbit)": ""
     }'
     ), (
         UUID(),
-        'Peso',
-        '99fe704a-fe14-4c31-b52e-f7acc0f545ff',
+        'Slots de expansão',
+        '9c3653da-21b2-4776-9dbf-1bd670abd2fe',
         '{
-        "Peso": "400 gramas (bruto com embalagem)"
+        "1 x slot PCI Express x16, rodando a x16 (PCIEX16) (Nota)": "",
+        "1 x slot PCI Express x16, rodando a x4 (PCIEX4)": "",
+        "1 slot PCI Express x1": "",
+        "Suporte para tecnologias AMD Quad-GPU CrossFire e AMD CrossFire de 2 vias": ""
+    }'
+    ), (
+        UUID(),
+        'Interface de armazenamento',
+        '9c3653da-21b2-4776-9dbf-1bd670abd2fe',
+        '{
+        "1 x conector M.2 (soquete 3, chave M, tipo 2242/2260/2280/22110 SATA e PCIe x4 / x2 suporte a SSD)": "",
+        "4 conectores SATA 6 Gb / s": "",
+        "Suporte para RAID 0, RAID 1 e RAID 10": ""
+    }'
+    ), (
+        UUID(),
+        'Conectores internos I/O',
+        '9c3653da-21b2-4776-9dbf-1bd670abd2fe',
+        '{
+        "1 x conector de alimentação principal ATX de 24 pinos": "",
+        "1 x conector de alimentação ATX 12V de 8 pinos": "",
+        "1 x header do ventilador da CPU": "",
+        "1 x header do ventilador do sistema": "",
+        "1 x conector M.2 soquete 3": "",
+        "4 conectores SATA 6 Gb / s": "",
+        "1 x header do painel frontal": "",
+        "1 x conector de áudio do painel frontal": "",
+        "1 x header S / PDIF Out": "",
+        "1 x tira de LED de refrigerador de CPU / cabeçalho de tira de LED RGB": "",
+        "1 x conector USB 3.1 Gen 1": "",
+        "2 conectores USB 2.0 / 1.1": "",
+        "1 x header Trusted Platform Module (TPM) (2x10 pinos, apenas para o módulo GC-TPM2.0)": "",
+        "1 x header de porta serial": "",
+        "1 x jumper CMOS claro": ""
+    }'
+    ), (
+        UUID(),
+        'Conectores painel traseiro',
+        '9c3653da-21b2-4776-9dbf-1bd670abd2fe',
+        '{
+        "1 porta de teclado / mouse PS / 2": "",
+        "1 porta DVI-D": "",
+        "1 porta HDMI": "",
+        "4 portas USB 3.1 Gen 1": "",
+        "4 portas USB 2.0 / 1.1": "",
+        "1 porta RJ-45": "",
+        "3 entradas de áudio": ""
+    }'
+    ), (
+        UUID(),
+        'Controlador I/O',
+        '9c3653da-21b2-4776-9dbf-1bd670abd2fe',
+        '{
+        "iTE I/O Chip controlador": ""
+    }'
+    ), (
+        UUID(),
+        'Monitoramento H/M',
+        '9c3653da-21b2-4776-9dbf-1bd670abd2fe',
+        '{
+        "Detecção de tensão": "",
+        "Detecção de temperatura": "",
+        "Detecção de velocidade do ventilador": "",
+        "Aviso de superaquecimento": "",
+        "Alerta de falha do ventilador": "",
+        "Controle de velocidade": "",
+        "Se a função de controle de velocidade do ventilador é suportada, isso dependerá do refrigerador instalado.": ""
     }'
     );
