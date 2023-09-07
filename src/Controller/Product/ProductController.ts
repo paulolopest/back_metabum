@@ -143,14 +143,15 @@ export class ProductController {
 	getFilteredCatalog = async (req: Request, res: Response) => {
 		try {
 			const { word } = req.params;
-			const { name, brand, department, orderBy, limit } = req.query;
+			const { name, brand, department, order, by, limit } = req.query;
 
 			const response = await this.productBusiness.getFilteredCatalog(
 				word,
 				name as string,
 				brand as string,
 				department as string,
-				orderBy as string,
+				order as string,
+				by as string,
 				Number(limit)
 			);
 

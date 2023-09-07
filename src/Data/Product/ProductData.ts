@@ -107,7 +107,8 @@ export class ProductData extends BaseDatabase {
 		name?: string,
 		brand?: string,
 		department?: string,
-		orderBy?: string,
+		order?: string,
+		by?: string | any,
 		limit?: number
 	) => {
 		try {
@@ -119,7 +120,7 @@ export class ProductData extends BaseDatabase {
 			if (department) query = query.andWhere('department', department);
 			if (name) query = query.andWhere('name', 'like', `%${name}%`);
 
-			query.orderBy('price', orderBy).limit(limit ? limit : 20);
+			query.orderBy(by, order).limit(limit ? limit : 20);
 
 			const result = await query;
 

@@ -188,7 +188,8 @@ export class ProductBusiness {
 		name?: string,
 		brand?: string,
 		department?: string,
-		orderBy?: string,
+		order?: string,
+		by?: string,
 		limit?: number
 	) => {
 		try {
@@ -197,7 +198,8 @@ export class ProductBusiness {
 				name,
 				brand,
 				department,
-				orderBy,
+				order,
+				by,
 				limit
 			);
 
